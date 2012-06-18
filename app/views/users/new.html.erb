@@ -1,0 +1,7 @@
+<h2>Sign up</h2>
+
+<%= form_for @user do |form| %>
+  <%= render :partial => '/users/form', :object => form %>
+  <br>
+  <%= form.submit 'Cadastrar' %>
+<% end %>

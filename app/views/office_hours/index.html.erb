@@ -1,0 +1,34 @@
+<h1>Lista de horário de trabalho</h1>
+<br>
+<%= form_tag office_hours_path, :method => :get, :class => "well form-inline"  do -%>
+  <label>Nome</label>
+  <%= text_field_tag :by_name, params[:by_name] %>
+  <button type="submit" class="btn"><i class="icon-search"></i></button>
+<% end -%>
+
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Nome</th>
+    <th>Horário livre</th>
+    <th>Tolerância de entrada</th>
+    <th>Tolerância de saída</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @office_hours.each do |office_hour| %>
+  <tr>
+    <td><%= office_hour.name %></td>
+    <td><%= office_hour.is_free %></td>
+    <td><%= office_hour.input_tolerance %></td>
+    <td><%= office_hour.output_tolerance %></td>
+    <td><%= link_to raw("<i class='icon-folder-open'></i>"), office_hour, :class => "btn btn-mini", :title => "Mostar" %></td>
+    <td><%= link_to raw("<i class='icon-pencil'></i>"), edit_office_hour_path(office_hour), :class => "btn btn-mini", :title => "Editar" %></td>
+    <td><%= link_to raw("<i class='icon-remove-sign'></i>"), office_hour, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to raw("<i class='icon-file'></i>Adicionar"), new_office_hour_path, :class => "btn", :title => "Adicionar" %>

@@ -1,0 +1,29 @@
+<h1>Lista de cargos</h1>
+<br>
+<%= form_tag roles_path, :method => :get, :class => "well form-inline"  do -%>
+  <label>Descrição</label>
+  <%= text_field_tag :by_description, params[:by_description] %>
+  <button type="submit" class="btn"><i class="icon-search"></i></button>
+<% end -%>
+  
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Descrição</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @roles.each do |role| %>
+  <tr>
+    <td><%= role.description %></td>
+    <td><%= link_to raw("<i class='icon-folder-open'></i>"), role, :class => "btn btn-mini", :title => "Mostar" %></td>
+    <td><%= link_to raw("<i class='icon-pencil'></i>"), edit_role_path(role), :class => "btn btn-mini", :title => "Editar" %></td>
+    <td><%= link_to raw("<i class='icon-remove-sign'></i>"), role, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to raw("<i class='icon-file'></i>Adicionar"), new_role_path, :class => "btn", :title => "Adicionar" %>

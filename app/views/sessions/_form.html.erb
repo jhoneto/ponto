@@ -1,0 +1,9 @@
+<%= form_for :session, :url => session_path do |form| %>
+    <label>Login</label>
+    <%= form.text_field :username %>
+    <label>Senha</label>
+    <%= form.password_field :password %>
+  <div class="submit_field">
+    <%= form.submit "Entrar" %>
+  </div>
+<% end %>

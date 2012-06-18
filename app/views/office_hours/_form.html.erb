@@ -1,0 +1,75 @@
+<%= simple_nested_form_for (@office_hour) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :is_free %>
+    <%= f.input :input_tolerance, :as => :integer %>
+    <%= f.input :output_tolerance, :as => :integer %>
+  </div>
+  <h4>Horários</h4>
+  <div class="form-vertical">
+    <div class="row">
+      <div class="span1">
+        <label>Dia</label>
+      </div>
+      <div class="span1">
+          <label>Entrada 1</label>
+      </div>
+      <div class="span1">
+          <label>Saída 1</label>
+      </div>
+      <div class="span1">
+          <label>Entrada 2</label>
+      </div>
+      <div class="span1">
+          <label>Saída 2</label>
+      </div>
+      <div class="span1">
+          <label>Entrada 3</label>
+      </div>
+      <div class="span1">
+          <label>Saída 3</label>
+      </div>
+      <div class="span1">
+        <label>Remover</label>
+      </div>
+    </div>
+  </div>
+  <% i = 0 %>
+  <%= f.fields_for :officehouritems do |items| %>
+    <div class="form-vertical">
+      <div class="row">
+        <div class="span1">
+          <%= items.hidden_field :day, :value => items.object.day.nil? ? i : items.object.day %>
+          <label><%=Day::DAY[items.object.day.nil? ? i : items.object.day]%></label>
+        </div>
+        <div class="span1">
+          <%= items.text_field :entry_1, :class => "span1 time" %>
+        </div>
+        <div class="span1">
+          <%= items.text_field :exit_1, :class => "span1 time" %>
+        </div>
+        <div class="span1">
+          <%= items.text_field :entry_2, :class => "span1 time" %>
+        </div>
+        <div class="span1">
+          <%= items.text_field :exit_2, :class => "span1 time" %>
+        </div>
+        <div class="span1">
+          <%= items.text_field :entry_3, :class => "span1 time" %>
+        </div>
+        <div class="span1">
+          <%= items.text_field :exit_3, :class => "span1 time" %>
+        </div>
+        <div class="span1">
+          <%= items.link_to_remove raw("<i class='icon-remove-sign icon-white'></i>"), :class => "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+    <% i = i + 1%>
+  <% end %>
+  <div class="form-actions">
+    <%= f.button :submit, "Salvar"%>
+  </div>
+<% end %>

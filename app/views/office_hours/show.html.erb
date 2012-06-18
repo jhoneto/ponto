@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Nome:</b>
+  <%= @office_hour.name %>
+</p>
+
+<p>
+  <b>Horário livre:</b>
+  <%= @office_hour.is_free %>
+</p>
+
+<p>
+  <b>Tolerância na entrada(min):</b>
+  <%= @office_hour.input_tolerance %>
+</p>
+
+<p>
+  <b>Tolerância na saída(min):</b>
+  <%= @office_hour.output_tolerance %>
+</p>
+
+
+<%= link_to 'Editar', edit_office_hour_path(@office_hour) %> |
+<%= link_to 'Voltar', office_hours_path %>

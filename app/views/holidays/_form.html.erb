@@ -1,0 +1,12 @@
+<%= simple_form_for(@holiday) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :date, :as => :string, :input_html => { :class => 'datepicker', :value => @holiday.date.nil? ? "" : @holiday.date.strftime('%d/%m/%Y')} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

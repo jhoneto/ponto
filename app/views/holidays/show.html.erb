@@ -1,0 +1,13 @@
+<p>
+  <b>Nome:</b>
+  <%= @holiday.name %>
+</p>
+
+<p>
+  <b>Data:</b>
+  <%= @holiday.date.strftime('%d/%m/%Y') %>
+</p>
+
+
+<%= link_to 'Editar', edit_holiday_path(@holiday) %> |
+<%= link_to 'Voltar', holidays_path %>
