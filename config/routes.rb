@@ -1,9 +1,13 @@
 Ponto::Application.routes.draw do
-  resources :office_hours
+  resources :departments
+
+  resources :employees
+
+  resources :enterprises
 
   resources :holidays
 
-  resources :departments
+  resources :office_hours
 
   resources :roles
 
