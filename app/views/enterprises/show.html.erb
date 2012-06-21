@@ -1,5 +1,8 @@
-<p id="notice"><%= notice %></p>
 
+<p>
+  <b>Nome:</b>
+  <%= @enterprise.name %>
+</p>
 
-<%= link_to 'Edit', edit_enterprise_path(@enterprise) %> |
-<%= link_to 'Back', enterprises_path %>
+<%= link_to 'Editar', edit_enterprise_path(@enterprise) %> |
+<%= link_to 'Voltar', enterprises_path %>

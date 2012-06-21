@@ -8,6 +8,7 @@ en:
       department: "Departamento"
       holiday: "Feriado"
       office_hour: "Horário de trabalho"
+      enterprise: "Empresa"
     attributes:
       role:
         description: "Descrição"
@@ -21,6 +22,19 @@ en:
         is_free: "Horário livre"
         input_tolerance: "Tolerância de entrada"
         output_tolerance: "Tolerância de saída"
+      enterprise:
+        name: "Nome"
+        corporate_name: "Razão social"
+        cnpj: "CNPJ"
+        address: "Endereço"
+        address_number: "Número"
+        address_complement: "Complemento"
+        address_zip_code: "CEP"
+        address_neighborhood: "Bairro"
+        address_city: "Cidade"
+        adress_state: "Estado"
+        email: "Email"
+        phone: "Telefone"
   flash:
     actions:
       create:

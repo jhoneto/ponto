@@ -1,21 +1,28 @@
-<h1>Listing enterprises</h1>
+<h1>Lista de empresas</h1>
+<br>
+<%= form_tag enterprises_path, :method => :get, :class => "well form-inline"  do -%>
+  <label>Nome</label>
+  <%= text_field_tag :by_name, params[:by_name] %>
+  <button type="submit" class="btn"><i class="icon-search"></i></button>
+<% end -%>
 
-<table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<table class="table table-bordered table-striped">
+	<tr>
+		<th>Nome</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
 
-<% @enterprises.each do |enterprise| %>
-  <tr>
-    <td><%= link_to 'Show', enterprise %></td>
-    <td><%= link_to 'Edit', edit_enterprise_path(enterprise) %></td>
-    <td><%= link_to 'Destroy', enterprise, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+	<% @enterprises.each do |enterprise| %>
+	<tr>
+		<td><%= link_to enterprise.name  %></td>
+		<td><%= link_to raw("<i class='icon-folder-open'></i>"), enterprise, :class => "btn btn-mini", :title => "Mostar" %></td>
+		<td><%= link_to raw("<i class='icon-pencil'></i>"), edit_enterprise_path(enterprise), :class => "btn btn-mini", :title => "Editar" %></td>
+		<td><%= link_to raw("<i class='icon-remove-sign'></i>"), enterprise, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td>
+	</tr>
+	<% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Enterprise', new_enterprise_path %>
+<%= link_to raw("<i class='icon-file'></i>Adicionar"), new_enterprise_path, :class => "btn", :title => "Adicionar" %>
