@@ -1,8 +1,15 @@
-<h1>Listing employees</h1>
+<h1>Lista de colaboradores</h1>
 
-<table>
+<%= form_tag employees_path, :method => :get, :class => "well form-inline"  do -%>
+  <label>Nome</label>
+  <%= text_field_tag :by_name, params[:by_name] %>
+  <button type="submit" class="btn"><i class="icon-search"></i></button>
+<% end -%>
+
+<table class="table table-bordered table-striped">
   <tr>
-    <th>Name</th>
+    <th>Nome</th>
+    <th>Matrícula</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,13 +18,14 @@
 <% @employees.each do |employee| %>
   <tr>
     <td><%= employee.name %></td>
-    <td><%= link_to 'Show', employee %></td>
-    <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-    <td><%= link_to 'Destroy', employee, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= employee.registry %></td>
+    <td><%= link_to raw("<i class='icon-folder-open'></i>"), employee, :class => "btn btn-mini", :title => "Mostar" %></td>
+    <td><%= link_to raw("<i class='icon-pencil'></i>"), edit_employee_path(employee), :class => "btn btn-mini", :title => "Editar" %></td>
+    <td><%= link_to raw("<i class='icon-remove-sign'></i>"), employee, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Employee', new_employee_path %>
+<%= link_to raw("<i class='icon-file'></i>Adicionar"), new_employee_path, :class => "btn", :title => "Adicionar" %>

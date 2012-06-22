@@ -3,4 +3,19 @@ class Employee < ActiveRecord::Base
 	belongs_to :role, :class_name => "Role", :foreign_key => "role_id"
 	belongs_to :department, :class_name => "Department", :foreign_key => "department_id"
 	belongs_to :office_hour, :class_name => "OfficeHour", :foreign_key => "office_hour_id"
+
+	scope :by_name, lambda {|parameter| where("upper(name) like upper(?)", "%#{parameter}%")}
+
+	validates_presence_of :name
+	validates_presence_of :registry
+	validates_presence_of :enterprise_id
+	validates_presence_of :office_hour_id
+
+	validates_uniqueness_of :registry
+
+	after_initialize :init
+
+    def init
+      self.status  ||= 1
+    end
 end

@@ -1,15 +1,26 @@
 <script>
+	function fingerprint(fg){
+		$('#employee_fingerprint').val(fg);
+		return false;
+	}
 	$(function() {
 
-		$("#enterprise_cnpj").mask("99.999.999/9999-99");
+		$("#employee_cpf").mask("999.999.999-99");
 		$("#employee_phone").mask("(99) 9999-9999");
 		$("#employee_cel_phone").mask("(99) 9999-9999");
-		$("#enterprise_address_zip_code").mask("99.999-999");
+		$("#employee_address_zip_code").mask("99.999-999");
 	}); 
 </script>
 
 <%= simple_form_for(@employee) do |f| %>
 <%= f.error_notification %>
+
+
+<%= f.input :fingerprint, :as => :hidden %>
+	        <div>
+	              <applet code="br/gov/ce/ipmfor/sgp/FormMain.class" archive="/sgp-edit.jar" width="400" height="450">	Seu browser não suporta applets
+	              </applet>
+	        </div>
 
 <div class="form-inputs">
 	<ul class="nav nav-tabs">
@@ -21,6 +32,9 @@
 		</li>
 		<li>
 			<a href="#tab3" data-toggle="tab">Endereço</a>
+		</li>
+		<li>
+			<a href="#tab4" data-toggle="tab">Digital</a>
 		</li>
 	</ul>
 	<div class="tab-content">
@@ -49,6 +63,9 @@
 			</div>
 			<div class="row">
 				<div class="span2">
+					<%= f.input :date_of_admission, :as => :string, :input_html => { :class => 'span2 datepicker' }%>
+				</div>
+				<div class="span2">
 					<%= f.input :sex, :collection => ['F', 'M'], :input_html => { :class => 'span2' }%>
 				</div>
 				<div class="span2">
@@ -58,7 +75,7 @@
 					<%= f.input :date_of_birth, :as => :string, :input_html => { :class => 'span2 datepicker' }%>
 				</div>
 				<div class="span2">
-					<%= f.input :status, :input_html => { :class => 'span2' }%>
+					<%= f.input :status, :collection => Status::STATUS_LIST, :input_html => { :class => 'span2' }%>
 				</div>
 			</div>
 			<div class="row">
@@ -72,10 +89,70 @@
 					<%= f.input :cel_phone, :input_html => { :class => 'span3' }%>
 				</div>
 			</div>
+			<div class="row">
+				<div class="span12">
+					<%= f.input :obs, :input_html => { :class => 'span12' }%>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane" id="tab2">
+		  <%= f.input :cpf %>
+		  <div class="row">
+		    <div class="span4">
+			  <%= f.input :rg_number, :input_html => { :class => 'span4' }%>
+		    </div>
+		    <div class="span4">
+			  <%= f.input :rg_issue_date, :as => :string, :input_html => { :class => 'span4 datepicker' }%>
+		    </div>
+		    <div class="span4">
+			  <%= f.input :rg_issuing, :input_html => { :class => 'span4' }%>
+		    </div>
+		  </div>
+		  <div class="row">
+		    <div class="span4">
+			  <%= f.input :nit_pis_pasep, :input_html => { :class => 'span4' }%>
+		    </div>
+		    <div class="span4">
+			  <%= f.input :ctps_number, :input_html => { :class => 'span4' }%>
+		    </div>
+		    <div class="span2">
+			  <%= f.input :cpts_series, :input_html => { :class => 'span2' }%>
+		    </div>
+		    <div class="span2">
+			  <%= f.input :cpts_uf, :input_html => { :class => 'span2' }%>
+		    </div>
+		  </div>
+		</div>
+		<div class="tab-pane" id="tab3">
+			<div class="row">
+				<div class="span6">
+					<%= f.input :address, :input_html => { :class => 'span6' } %>
+				</div>
+				<div class="span2">
+					<%= f.input :address_number, :input_html => { :class => 'span2' } %>
+				</div>
+				<div class="span4">
+					<%= f.input :address_complement, :input_html => { :class => 'span4' } %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<%= f.input :address_neighborhood, :input_html => { :class => 'span4' } %>
+				</div>
+				<div class="span2">
+					<%= f.input :address_zip_code, :input_html => { :class => 'span2' } %>
+				</div>
+				<div class="span4">
+					<%= f.input :address_city, :input_html => { :class => 'span4' } %>
+				</div>
+				<div class="span2">
+					<%= f.input :adress_state, :input_html => { :class => 'span2' } %>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane active" id="tab4">
 			
 		</div>
-		<div class="tab-pane" id="tab2"></div>
-		<div class="tab-pane" id="tab3"></div>
 	</div>
 </div>
 
