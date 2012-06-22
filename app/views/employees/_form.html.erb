@@ -1,11 +1,85 @@
+<script>
+	$(function() {
+
+		$("#enterprise_cnpj").mask("99.999.999/9999-99");
+		$("#employee_phone").mask("(99) 9999-9999");
+		$("#employee_cel_phone").mask("(99) 9999-9999");
+		$("#enterprise_address_zip_code").mask("99.999-999");
+	}); 
+</script>
+
 <%= simple_form_for(@employee) do |f| %>
-  <%= f.error_notification %>
+<%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-  </div>
+<div class="form-inputs">
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="#tab1" data-toggle="tab">Dados gerais</a>
+		</li>
+		<li>
+			<a href="#tab2" data-toggle="tab">Documentos</a>
+		</li>
+		<li>
+			<a href="#tab3" data-toggle="tab">Endereço</a>
+		</li>
+	</ul>
+	<div class="tab-content">
+		<div class="tab-pane active" id="tab1">
+			<div class="row">
+				<div class="span2">
+					<%= f.input :registry, :input_html => { :class => 'span2' }%>
+				</div>
+				<div class="span6">
+					<%= f.input :name, :input_html => { :class => 'span6' }%>
+				</div>
+				<div class="span4">
+					<%= f.association :enterprise, :label_method => :name, :input_html => { :class => 'span4' }%>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<%= f.association :office_hour, :label_method => :name, :input_html => { :class => 'span4' }%>
+				</div>
+				<div class="span4">
+					<%= f.association :department, :label_method => :name, :input_html => { :class => 'span4' }%>
+				</div>
+				<div class="span4">
+					<%= f.association :role, :label_method => :description, :input_html => { :class => 'span4' }%>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span2">
+					<%= f.input :sex, :collection => ['F', 'M'], :input_html => { :class => 'span2' }%>
+				</div>
+				<div class="span2">
+					<%= f.input :password, :input_html => { :class => 'span2' }%>
+				</div>
+				<div class="span2">
+					<%= f.input :date_of_birth, :as => :string, :input_html => { :class => 'span2 datepicker' }%>
+				</div>
+				<div class="span2">
+					<%= f.input :status, :input_html => { :class => 'span2' }%>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<%= f.input :email, :input_html => { :class => 'span6' }%>
+				</div>
+				<div class="span3">
+					<%= f.input :phone, :input_html => { :class => 'span3' }%>
+				</div>
+				<div class="span3">
+					<%= f.input :cel_phone, :input_html => { :class => 'span3' }%>
+				</div>
+			</div>
+			
+		</div>
+		<div class="tab-pane" id="tab2"></div>
+		<div class="tab-pane" id="tab3"></div>
+	</div>
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
+<div class="form-actions">
+	<%= f.button :submit, "Salvar" %>
+</div>
 <% end %>
