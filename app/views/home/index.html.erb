@@ -5,6 +5,26 @@ jQuery(function($){
    $("#tin").mask("99-9999999");
    $("#ssn").mask("999-99-9999");
 });
+
+function fingerprint(fg){
+		var id = $('#employee_registry').val();
+		$.post('/points', {id: id, template: fg});
+	}
+
 </script>
-Olá
-<input id="date" type="text" tabindex="1">
+<div id="retorno_ponto">
+</div>
+
+
+  <label>Matrícula</label>
+  <%= text_field_tag :employee_registry%>
+  <label>Digital</label>
+  <%= hidden_field_tag :fingerprint%>
+
+<applet 
+		code="br/gov/ce/ipmfor/sgp/FormMain.class" 
+		archive="/sgp-identify.jar" 
+		width="400" 
+		height="450">	
+		Seu browser não suporta applets
+	</applet>

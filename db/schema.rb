@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120621124845) do
+ActiveRecord::Schema.define(:version => 20120625164823) do
 
   create_table "departments", :force => true do |t|
     t.string   "name"
@@ -97,6 +97,20 @@ ActiveRecord::Schema.define(:version => 20120621124845) do
     t.boolean  "is_free"
     t.integer  "input_tolerance"
     t.integer  "output_tolerance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "points", :force => true do |t|
+    t.integer  "employee_id"
+    t.datetime "date_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "records", :force => true do |t|
+    t.integer  "employee_id"
+    t.time     "time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

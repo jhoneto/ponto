@@ -11,6 +11,12 @@ Ponto::Application.routes.draw do
 
   resources :roles
 
+  resources :points do
+    member do
+      post 'registry'
+    end
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

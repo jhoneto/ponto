@@ -17,10 +17,7 @@
 
 
 <%= f.input :fingerprint, :as => :hidden %>
-	        <div>
-	              <applet code="br/gov/ce/ipmfor/sgp/FormMain.class" archive="/sgp-edit.jar" width="400" height="450">	Seu browser não suporta applets
-	              </applet>
-	        </div>
+	        
 
 <div class="form-inputs">
 	<ul class="nav nav-tabs">
@@ -151,7 +148,17 @@
 			</div>
 		</div>
 		<div class="tab-pane active" id="tab4">
-			
+			<% if @employee.new_record? %>
+			  <div>
+	              <applet code="br/gov/ce/ipmfor/sgp/FormMain.class" archive="/sgp-new.jar" width="400" height="450">	Seu browser não suporta applets
+	              </applet>
+	          </div>
+			<% else %>
+			  <div>
+	              <applet code="br/gov/ce/ipmfor/sgp/FormMain.class" archive="/sgp-edit.jar" width="400" height="450">	Seu browser não suporta applets
+	              </applet>
+	          </div>
+	        <% end %>
 		</div>
 	</div>
 </div>
