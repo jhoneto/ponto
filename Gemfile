@@ -12,6 +12,7 @@ gem "has_scope", "~> 0.5.1"
 gem "responders", "~> 0.9.1"
 gem "clearance", "~> 0.16.3"
 gem "nested_form", "~> 0.2.1"
+gem "odf-report", "~> 0.4.4"
 
 group :development, :test do
   gem 'rspec-rails'

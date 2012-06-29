@@ -1,0 +1,9 @@
+<%= form_tag ficha_ponto_reports_path, :method => :get, :class => "well form-inline"  do -%>
+  <label>Matricula</label>
+  <%= text_field_tag :registry %>
+  <label>Data inicial</label>
+  <%= text_field_tag :date_start, '', :class => "datepicker" %>
+  <label>Data final</label>
+  <%= text_field_tag :date_end, '', :class => "datepicker" %>
+  <button type="submit" class="btn"><i class="icon-search"></i></button>
+<% end -%>

@@ -9,6 +9,14 @@ Ponto::Application.routes.draw do
 
   resources :office_hours
 
+  resources :reports do
+
+    collection do
+      get "filter_ficha_ponto"
+      get "ficha_ponto"
+    end
+  end
+
   resources :roles
 
   resources :points do
