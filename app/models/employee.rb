@@ -18,4 +18,16 @@ class Employee < ActiveRecord::Base
     def init
       self.status  ||= 1
     end
+
+
+    def self.save_fingerprint(registry, fingerprint)
+    	employee = Employee.find_by_registry(registry)
+    	if employee.nil?
+    		-1
+        else
+    	  employee.fingerprint = fingerprint
+    	  employee.save
+    	  1
+    	end
+    end
 end

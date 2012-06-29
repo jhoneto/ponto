@@ -12,8 +12,8 @@ Ponto::Application.routes.draw do
   resources :roles
 
   resources :points do
-    member do
-      post 'registry'
+    collection do
+      post 'save_fingerprint'
     end
   end
 

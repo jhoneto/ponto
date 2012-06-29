@@ -1,0 +1,32 @@
+<script>
+function fingerprint(fg){
+		var id = $('#employee_registry').val();
+		var option = $('input:radio[name=action]:checked').val();
+		if (option == 'save')
+		{
+           $.post('/points/save_fingerprint', {id: id, template: fg});
+		} else {
+           $.post('/points', {id: id, template: fg});
+		}
+		  
+	}
+</script>
+
+<div id="retorno_ponto"></div>
+
+<div class="well" style="padding-left:30%">
+<label class="radio">
+  <input type="radio" name="action" value="registry" checked /> Registrar ponto
+</label>
+<label class="radio">
+  <input type="radio" name="action" value="save" /> Cadastrar digital
+</label>
+
+<label>Matrícula</label>
+<%= text_field_tag :employee_registry%>
+<label>Digital</label>
+<%= hidden_field_tag :fingerprint%>
+
+<applet  code="br/gov/ce/ipmfor/sgp/FormMain.class"  archive="/sgp-identify.jar"  width="400"  height="450"> Seu browser não suporta applets </applet>
+
+</div>
