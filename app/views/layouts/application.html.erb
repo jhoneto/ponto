@@ -20,6 +20,7 @@
       <div class="container">
         <%= link_to "Sistema de ponto", root_path, :class => "brand"%>
         <ul class="nav">
+          <li> <%= link_to "Registro de ponto", points_path%></li>
           <li class="dropdown" id="menu1">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#menu1">
               Cadastros
@@ -32,6 +33,15 @@
               <li><%=link_to "Departamentos", departments_path%></li>
               <li><%=link_to "Feriados", holidays_path%></li>
               <li><%=link_to "Horários de trabalho", office_hours_path%></li>
+            </ul>
+          </li>
+          <li class="dropdown" id="menu2">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#menu2">
+              Relatorios
+              <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%=link_to "Ficha de ponto", filter_ficha_ponto_reports_path%></li>
             </ul>
           </li>
         </ul>
