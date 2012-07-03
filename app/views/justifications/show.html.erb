@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Colaborado:</b>
+  <%= @justification.employee.name %>
+</p>
+
+<p>
+  <b>Descrição:</b>
+  <%= @justification.description %>
+</p>
+
+<p>
+  <b>Data inicial:</b>
+  <%= @justification.start_date %>
+</p>
+
+<p>
+  <b>Data final:</b>
+  <%= @justification.end_date %>
+</p>
+
+
+<%= link_to 'Editar', edit_justification_path(@justification) %> |
+<%= link_to 'Voltar', justifications_path %>

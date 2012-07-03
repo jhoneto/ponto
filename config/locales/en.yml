@@ -10,14 +10,18 @@ en:
       office_hour: "Horário de trabalho"
       enterprise: "Empresa"
       employee: "Colaborador"
+      justification: "Justificativa"
     attributes:
       role:
         description: "Descrição"
       department:
         name: "Descrição"
+        enterprise: "Empresa"
+        employee: "Responsável"
       holiday:
         name: "Nome"
         date: "Data"
+        enterprise: "Empresa"
       office_hour:
         name: "Nome"
         is_free: "Horário livre"
@@ -68,6 +72,11 @@ en:
         department: "Departamento"
         status: "Status"
         obs: "Observação"
+      justification:
+        description: "Descrição"
+        employee: "Colaborador"
+        start_date: "Data inicial"
+        end_date: "Data final"
   flash:
     actions:
       create:

@@ -1,0 +1,14 @@
+<%= simple_form_for(@justification) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :employee, :label_method => :name %>
+    <%= f.input :description %>
+    <%= f.input :start_date, :as => :string, :input_html => { :class => 'datepicker', :value => @justification.start_date.nil? ? "" : @justification.start_date.strftime('%d/%m/%Y')} %>
+    <%= f.input :end_date, :as => :string, :input_html => { :class => 'datepicker', :value => @justification.end_date.nil? ? "" : @justification.end_date.strftime('%d/%m/%Y')} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

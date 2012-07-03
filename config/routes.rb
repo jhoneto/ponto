@@ -1,4 +1,6 @@
 Ponto::Application.routes.draw do
+  resources :justifications
+
   resources :departments
 
   resources :employees do
