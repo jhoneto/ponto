@@ -1,8 +1,23 @@
 <script>
-	function fingerprint(fg){
+	function fingerprint(fg) {
 		$('#employee_fingerprint').val(fg);
 		return false;
 	}
+
+	function load_others_collections() {
+		alert("oi");
+		var id = $('#employee_enterprise_id :selected').val();
+		jQuery.get('/employees/get_office_hours?enterprise_id=' + id, function(data) {
+			$("#combo_office_hour").html(data);
+		});
+		
+		jQuery.get('/employees/get_departments?enterprise_id=' + id, function(data) {
+			$("#combo_department").html(data);
+		});
+		
+		return false;
+	}
+
 	$(function() {
 
 		$("#employee_cpf").mask("999.999.999-99");
@@ -14,9 +29,6 @@
 
 <%= simple_form_for(@employee) do |f| %>
 <%= f.error_notification %>
-
-
-	        
 
 <div class="form-inputs">
 	<ul class="nav nav-tabs">
@@ -40,15 +52,19 @@
 					<%= f.input :name, :input_html => { :class => 'span6' }%>
 				</div>
 				<div class="span4">
-					<%= f.association :enterprise, :label_method => :name, :input_html => { :class => 'span4' }%>
+					<%= f.association :enterprise, :label_method => :name, :input_html => { :class => 'span4', :onChange => "load_others_collections()" }%>
 				</div>
 			</div>
 			<div class="row">
 				<div class="span4">
-					<%= f.association :office_hour, :label_method => :name, :input_html => { :class => 'span4' }%>
+					<div id="combo_office_hour">
+						<%= render :partial => 'combo_office_hours', :locals => {:f => f, :office_hours => @office_hours} %>
+					</div>
 				</div>
 				<div class="span4">
-					<%= f.association :department, :label_method => :name, :input_html => { :class => 'span4' }%>
+					<div id="combo_department">
+						<%= render :partial => 'combo_departments', :locals => {:f => f, :departments => @departaments}  %>
+					</div>
 				</div>
 				<div class="span4">
 					<%= f.association :role, :label_method => :description, :input_html => { :class => 'span4' }%>
@@ -89,32 +105,32 @@
 			</div>
 		</div>
 		<div class="tab-pane" id="tab2">
-		  <%= f.input :cpf %>
-		  <div class="row">
-		    <div class="span4">
-			  <%= f.input :rg_number, :input_html => { :class => 'span4' }%>
-		    </div>
-		    <div class="span4">
-			  <%= f.input :rg_issue_date, :as => :string, :input_html => { :class => 'span4 datepicker' }%>
-		    </div>
-		    <div class="span4">
-			  <%= f.input :rg_issuing, :input_html => { :class => 'span4' }%>
-		    </div>
-		  </div>
-		  <div class="row">
-		    <div class="span4">
-			  <%= f.input :nit_pis_pasep, :input_html => { :class => 'span4' }%>
-		    </div>
-		    <div class="span4">
-			  <%= f.input :ctps_number, :input_html => { :class => 'span4' }%>
-		    </div>
-		    <div class="span2">
-			  <%= f.input :cpts_series, :input_html => { :class => 'span2' }%>
-		    </div>
-		    <div class="span2">
-			  <%= f.input :cpts_uf, :input_html => { :class => 'span2' }%>
-		    </div>
-		  </div>
+			<%= f.input :cpf %>
+			<div class="row">
+				<div class="span4">
+					<%= f.input :rg_number, :input_html => { :class => 'span4' }%>
+				</div>
+				<div class="span4">
+					<%= f.input :rg_issue_date, :as => :string, :input_html => { :class => 'span4 datepicker' }%>
+				</div>
+				<div class="span4">
+					<%= f.input :rg_issuing, :input_html => { :class => 'span4' }%>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span4">
+					<%= f.input :nit_pis_pasep, :input_html => { :class => 'span4' }%>
+				</div>
+				<div class="span4">
+					<%= f.input :ctps_number, :input_html => { :class => 'span4' }%>
+				</div>
+				<div class="span2">
+					<%= f.input :cpts_series, :input_html => { :class => 'span2' }%>
+				</div>
+				<div class="span2">
+					<%= f.input :cpts_uf, :input_html => { :class => 'span2' }%>
+				</div>
+			</div>
 		</div>
 		<div class="tab-pane" id="tab3">
 			<div class="row">
@@ -143,7 +159,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 </div>
 

@@ -1,4 +1,5 @@
 class Holiday < ActiveRecord::Base
+  belongs_to :enterprise, :class_name => "Enterprise", :foreign_key => "enterprise_id"
 	validates_presence_of :name
 	validates_presence_of :date
 

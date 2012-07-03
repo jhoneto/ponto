@@ -10,10 +10,7 @@ class ReportsController < ApplicationController
       r.add_field(:employee_name, employee.name)
       r.add_field(:departament_name, employee.department.name)
       r.add_field(:role_name, employee.role.description)
-
-      puts "1111111111111111111111111"
-      card_points = Point.prepare_card_point_single(employee, params[:date_start].to_date, params[:date_end].to_date)
-      puts "2222222222222222222222222"
+      card_points, faults, delays = Point.prepare_card_point_single(employee, params[:date_start].to_date, params[:date_end].to_date)
 
       r.add_table("TABLE_POINTS", card_points, :header => true, :skip_if_empty => true) do |t|
         t.add_column(:date_time)
@@ -25,6 +22,10 @@ class ReportsController < ApplicationController
         t.add_column(:s6)
         t.add_column(:obs)
       end
+      
+      r.add_field(:delays, delays)
+      r.add_field(:faults, faults)
+      
     end
 
     report_file_name = report.generate

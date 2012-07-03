@@ -2,6 +2,7 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+  	<%= f.association :enterprise, :label_method =>"name", :include_blank => true %>
     <%= f.input :name %>
     <%= f.input :date, :as => :string, :input_html => { :class => 'datepicker', :value => @holiday.date.nil? ? "" : @holiday.date.strftime('%d/%m/%Y')} %>
   </div>

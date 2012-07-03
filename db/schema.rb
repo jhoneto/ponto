@@ -11,12 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120629171437) do
+ActiveRecord::Schema.define(:version => 20120703013527) do
 
   create_table "departments", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "enterprise_id"
+    t.integer  "employee_id"
   end
 
   create_table "employees", :force => true do |t|
@@ -77,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20120629171437) do
     t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "enterprise_id"
   end
 
   create_table "office_hour_items", :force => true do |t|
@@ -99,6 +102,7 @@ ActiveRecord::Schema.define(:version => 20120629171437) do
     t.integer  "output_tolerance"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "enterprise_id"
   end
 
   create_table "points", :force => true do |t|

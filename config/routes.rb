@@ -1,7 +1,12 @@
 Ponto::Application.routes.draw do
   resources :departments
 
-  resources :employees
+  resources :employees do
+    collection do
+      get "get_office_hours"
+      get "get_departments"
+    end
+  end
 
   resources :enterprises
 

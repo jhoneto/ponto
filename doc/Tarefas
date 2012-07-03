@@ -1,0 +1,18 @@
+Montar hierarquia empresa/departamentos - OK
+Colocar responsavel pelo departamento - OK
+Colocar horário de trabalho por empresa - OK
+Colocar feriado por empresa ou todas - OK
+Alterar cadastro do colaborador para mostrar apenas departamentos da empresa
+Imprimir a ficha de ponto por empresa/departamento
+Batida de ponto pelo SDK do fabricante do leitor
+
+Incluir justificativa
+  - Empregado
+  - Data inicial
+  - Data final
+  - Justificativa
+
+Relatorios
+  1. Faltosos
+  2. Justificativas
+    
