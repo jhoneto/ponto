@@ -24,7 +24,7 @@ class EmployeesController < InheritedResources::Base
     if @departments.empty?
       @departments = []
     end 
-    render :partial => "combo_departments", :locals => { :departments => @departments } 
+    render :json => @departments.to_json(:only => [:id, :name]) 
   end
   
   def get_office_hours
@@ -32,6 +32,6 @@ class EmployeesController < InheritedResources::Base
     if @office_hours.empty?
       @office_hours = []
     end
-    render :partial => "combo_office_hours", :locals => { :office_hours => @office_hours }
+    render :json => @office_hours.to_json(:only => [:id, :name])
   end
 end

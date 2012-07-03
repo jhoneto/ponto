@@ -5,16 +5,21 @@
 	}
 
 	function load_others_collections() {
-		alert("oi");
 		var id = $('#employee_enterprise_id :selected').val();
-		jQuery.get('/employees/get_office_hours?enterprise_id=' + id, function(data) {
-			$("#combo_office_hour").html(data);
+		$.getJSON("/employees/get_departments?enterprise_id="+id, id, function(j) {
+			var options = '<option value=""></option>';
+			$.each(j, function(i, item) {
+				options += '<option value="' + item.id + '">' + item.name + '</option>';
+			});
+			$("#employee_department_id").html(options);
 		});
-		
-		jQuery.get('/employees/get_departments?enterprise_id=' + id, function(data) {
-			$("#combo_department").html(data);
+		$.getJSON("/employees/get_office_hours?enterprise_id="+id, id, function(j) {
+			var options = '<option value=""></option>';
+			$.each(j, function(i, item) {
+				options += '<option value="' + item.id + '">' + item.name + '</option>';
+			});
+			$("#employee_office_hour_id").html(options);
 		});
-		
 		return false;
 	}
 
@@ -63,7 +68,7 @@
 				</div>
 				<div class="span4">
 					<div id="combo_department">
-						<%= render :partial => 'combo_departments', :locals => {:f => f, :departments => @departaments}  %>
+						<%= f.association :department, :collection => @departments, :label_method => :name, :input_html => { :class => 'span4' }%>
 					</div>
 				</div>
 				<div class="span4">
