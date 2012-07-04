@@ -6,11 +6,15 @@ Alterar cadastro do colaborador para mostrar apenas departamentos e horários da
 Imprimir a ficha de ponto por empresa/departamento
 Batida de ponto pelo SDK do fabricante do leitor
 
-Incluir justificativa
+Verificar jasper_rails(fortes)
+
+Incluir justificativa - OK
   - Empregado
   - Data inicial
   - Data final
   - Justificativa
+  
+Verificar justificativas na ficha de ponto
 
 Relatorios
   1. Faltosos
