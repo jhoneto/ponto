@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.5'
+gem 'rails', '3.1.3'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -13,6 +13,7 @@ gem "responders", "~> 0.9.1"
 gem "clearance", "~> 0.16.3"
 gem "nested_form", "~> 0.2.1"
 gem "odf-report", "~> 0.4.4"
+gem "jasper-rails", "~> 0.1.2"
 
 group :development, :test do
   gem 'rspec-rails'

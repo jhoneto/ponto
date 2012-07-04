@@ -3,6 +3,7 @@ class Employee < ActiveRecord::Base
 	belongs_to :role, :class_name => "Role", :foreign_key => "role_id"
 	belongs_to :department, :class_name => "Department", :foreign_key => "department_id"
 	belongs_to :office_hour, :class_name => "OfficeHour", :foreign_key => "office_hour_id"
+	has_many :points, :class_name => "Point", :foreign_key => "employee_id"
 
 	scope :by_name, lambda {|parameter| where("upper(name) like upper(?)", "%#{parameter}%")}
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="index_points" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e36e8496-0433-46f0-b635-6a2002c786d1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="xPath">
+		<![CDATA[/employees/employee/points/point]]>
+	</queryString>
+	<field name="date-time" class="java.lang.String">
+		<fieldDescription><![CDATA[date-time]]></fieldDescription>
+	</field>
+	<field name="action" class="java.lang.String">
+		<fieldDescription><![CDATA[action]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b204d10a-5179-4652-981e-a180a3e57641" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{date-time}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="04a0e07f-5611-4e04-ad06-c176012dc23a" x="148" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{action}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,4 +1,12 @@
 class ReportsController < ApplicationController
+  respond_to :html, :xml, :json, :pdf
+ 
+
+  def index
+    @employees = Employee.find(:all) #apply_scopes(Employee).all
+    respond_with @employees, :include => [ :points]
+  end
+
   def filter_ficha_ponto
   end
 

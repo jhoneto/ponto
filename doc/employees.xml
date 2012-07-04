@@ -1,0 +1,109 @@
+<employees type="array">
+<employee>
+<id type="integer">1</id>
+<name>Hamilton Oliveira</name>
+<fingerprint nil="true"/>
+<cpf/>
+<sex/>
+<registry>001</registry>
+<password/>
+<enterprise-id type="integer">1</enterprise-id>
+<date-of-birth type="date" nil="true"/>
+<address/>
+<address-number/>
+<address-complement/>
+<address-zip-code/>
+<address-neighborhood/>
+<address-city/>
+<adress-state/>
+<email/>
+<phone/>
+<cel-phone/>
+<rg-number/>
+<rg-issuing/>
+<rg-issue-date type="date" nil="true"/>
+<ctps-number/>
+<cpts-series/>
+<cpts-uf/>
+<nit-pis-pasep/>
+<date-of-admission type="date" nil="true"/>
+<office-hour-id type="integer">2</office-hour-id>
+<role-id type="integer">1</role-id>
+<department-id type="integer">1</department-id>
+<status type="integer">1</status>
+<obs/>
+<created-at type="datetime">2012-07-01T16:41:18-03:00</created-at>
+<updated-at type="datetime">2012-07-02T15:12:32-03:00</updated-at>
+<points type="array">
+<point>
+<id type="integer">3</id>
+<employee-id type="integer">1</employee-id>
+<date-time type="datetime">2012-07-02T12:46:00-03:00</date-time>
+<created-at type="datetime" nil="true"/>
+<updated-at type="datetime" nil="true"/>
+<action type="integer">3</action>
+</point>
+<point>
+<id type="integer">4</id>
+<employee-id type="integer">1</employee-id>
+<date-time type="datetime">2012-07-02T16:56:00-03:00</date-time>
+<created-at type="datetime" nil="true"/>
+<updated-at type="datetime" nil="true"/>
+<action type="integer">4</action>
+</point>
+<point>
+<id type="integer">1</id>
+<employee-id type="integer">1</employee-id>
+<date-time type="datetime">2012-07-02T08:16:00-03:00</date-time>
+<created-at type="datetime" nil="true"/>
+<updated-at type="datetime" nil="true"/>
+<action type="integer">1</action>
+</point>
+<point>
+<id type="integer">2</id>
+<employee-id type="integer">1</employee-id>
+<date-time type="datetime">2012-07-02T11:40:00-03:00</date-time>
+<created-at type="datetime" nil="true"/>
+<updated-at type="datetime" nil="true"/>
+<action type="integer">2</action>
+</point>
+</points>
+</employee>
+<employee>
+<id type="integer">2</id>
+<name>Teste</name>
+<fingerprint nil="true"/>
+<cpf/>
+<sex/>
+<registry>002</registry>
+<password/>
+<enterprise-id type="integer">1</enterprise-id>
+<date-of-birth type="date" nil="true"/>
+<address/>
+<address-number/>
+<address-complement/>
+<address-zip-code/>
+<address-neighborhood/>
+<address-city/>
+<adress-state/>
+<email/>
+<phone/>
+<cel-phone/>
+<rg-number/>
+<rg-issuing/>
+<rg-issue-date type="date" nil="true"/>
+<ctps-number/>
+<cpts-series/>
+<cpts-uf/>
+<nit-pis-pasep/>
+<date-of-admission type="date">2012-07-03</date-of-admission>
+<office-hour-id type="integer">2</office-hour-id>
+<role-id type="integer">1</role-id>
+<department-id type="integer">1</department-id>
+<status type="integer">1</status>
+<obs/>
+<created-at type="datetime">2012-07-03T21:38:05-03:00</created-at>
+<updated-at type="datetime">2012-07-03T21:38:05-03:00</updated-at>
+<points type="array"/>
+</employee>
+</employees>

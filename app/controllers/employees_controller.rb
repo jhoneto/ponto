@@ -1,10 +1,11 @@
 class EmployeesController < InheritedResources::Base
-	respond_to :html, :xml, :json
+	respond_to :html, :xml, :json, :pdf
 
   has_scope :by_name
 
   def index
-    @employees = apply_scopes(Employee).all
+    @employees = Employee.find(:all, :include => :points) #apply_scopes(Employee).all
+    respond_with @employees, :include => [ :points]
   end
   
   def new
