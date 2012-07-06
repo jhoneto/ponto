@@ -5,7 +5,7 @@
 <fingerprint nil="true"/>
 <cpf/>
 <sex/>
-<registry>001</registry>
+<registry>0015</registry>
 <password/>
 <enterprise-id type="integer">1</enterprise-id>
 <date-of-birth type="date" nil="true"/>
@@ -34,40 +34,22 @@
 <obs/>
 <created-at type="datetime">2012-07-01T16:41:18-03:00</created-at>
 <updated-at type="datetime">2012-07-02T15:12:32-03:00</updated-at>
-<points type="array">
-<point>
+<currentpoints>
+<currentpoint>
 <id type="integer">3</id>
 <employee-id type="integer">1</employee-id>
-<date-time type="datetime">2012-07-02T12:46:00-03:00</date-time>
-<created-at type="datetime" nil="true"/>
-<updated-at type="datetime" nil="true"/>
-<action type="integer">3</action>
-</point>
-<point>
-<id type="integer">4</id>
-<employee-id type="integer">1</employee-id>
-<date-time type="datetime">2012-07-02T16:56:00-03:00</date-time>
-<created-at type="datetime" nil="true"/>
-<updated-at type="datetime" nil="true"/>
+<date type="date">2012-06-05</date>
+<entry-1 type="datetime">2000-01-01T17:23:28-02:00</entry-1>
+<exit-1 type="datetime">2000-01-01T20:49:29-02:00</exit-1>
+<entry-2 type="datetime">2000-01-01T20:50:57-02:00</entry-2>
+<exit-2 type="datetime">2000-01-01T20:52:06-02:00</exit-2>
+<entry-3 type="datetime" nil="true"/>
+<exit-3 type="datetime" nil="true"/>
+<created-at type="datetime">2012-07-04T16:23:28-03:00</created-at>
+<updated-at type="datetime">2012-07-04T19:52:06-03:00</updated-at>
 <action type="integer">4</action>
-</point>
-<point>
-<id type="integer">1</id>
-<employee-id type="integer">1</employee-id>
-<date-time type="datetime">2012-07-02T08:16:00-03:00</date-time>
-<created-at type="datetime" nil="true"/>
-<updated-at type="datetime" nil="true"/>
-<action type="integer">1</action>
-</point>
-<point>
-<id type="integer">2</id>
-<employee-id type="integer">1</employee-id>
-<date-time type="datetime">2012-07-02T11:40:00-03:00</date-time>
-<created-at type="datetime" nil="true"/>
-<updated-at type="datetime" nil="true"/>
-<action type="integer">2</action>
-</point>
-</points>
+</currentpoint>
+</currentpoints>
 </employee>
 <employee>
 <id type="integer">2</id>
@@ -104,6 +86,6 @@
 <obs/>
 <created-at type="datetime">2012-07-03T21:38:05-03:00</created-at>
 <updated-at type="datetime">2012-07-03T21:38:05-03:00</updated-at>
-<points type="array"/>
+<currentpoints/>
 </employee>
 </employees>

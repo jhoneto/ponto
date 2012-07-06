@@ -6,23 +6,18 @@
 	<queryString language="xPath">
 		<![CDATA[/employees/employee/points/point]]>
 	</queryString>
-	<field name="date-time" class="java.lang.String">
-		<fieldDescription><![CDATA[date-time]]></fieldDescription>
+	<field name="date" class="java.lang.String">
+		<fieldDescription><![CDATA[date]]></fieldDescription>
 	</field>
-	<field name="action" class="java.lang.String">
-		<fieldDescription><![CDATA[action]]></fieldDescription>
+	<field name="entry_1" class="java.lang.String">
+		<fieldDescription><![CDATA[entry_1]]></fieldDescription>
 	</field>
 	<detail>
-		<band height="26" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField isBlankWhenNull="true">
 				<reportElement uuid="b204d10a-5179-4652-981e-a180a3e57641" x="0" y="0" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{date-time}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement uuid="04a0e07f-5611-4e04-ad06-c176012dc23a" x="148" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{action}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

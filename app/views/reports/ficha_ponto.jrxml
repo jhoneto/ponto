@@ -53,17 +53,20 @@
 	<queryString language="xPath">
 		<![CDATA[/employees/employee]]>
 	</queryString>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
 	<field name="name" class="java.lang.String">
 		<fieldDescription><![CDATA[name]]></fieldDescription>
 	</field>
-	<field name="email" class="java.lang.String">
-		<fieldDescription><![CDATA[email]]></fieldDescription>
+	<field name="registry" class="java.lang.String">
+		<fieldDescription><![CDATA[registry]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="22" splitType="Stretch">
+		<band height="24" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="e149204c-c974-448e-8ea7-4cf476403803" x="0" y="0" width="555" height="20"/>
 				<textElement textAlignment="Center"/>
@@ -82,17 +85,44 @@
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<detail>
-		<band height="28" splitType="Stretch">
+		<band height="168" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="8486cca0-db7c-4c6e-984c-49d69e3c5749" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[@id]]></text>
+			</staticText>
 			<textField>
-				<reportElement uuid="ce862d49-89a7-454d-aa23-7ea1f64fdaf3" x="70" y="0" width="483" height="20"/>
+				<reportElement uuid="f584ab55-282d-49c6-86f4-3e33f2dafd56" x="100" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2ee17133-cacf-46e0-b642-7312a4cb98a0" x="0" y="20" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[name]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="83e4c6ff-1dcd-43eb-9fd3-a9888dbe352d" x="100" y="20" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="ebb0e7d1-4c2b-4336-bbc4-0c16eea131f6" x="2" y="0" width="68" height="20"/>
+				<reportElement uuid="53703e22-d317-4770-91ec-3a265258b173" x="0" y="41" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[Colaborador:]]></text>
+				<text><![CDATA[registry]]></text>
 			</staticText>
+			<textField>
+				<reportElement uuid="0a60b586-be5f-46a4-8b82-60037611c386" x="100" y="41" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{registry}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement uuid="9d62724b-89bf-4408-95e0-5dffb6600b15" x="0" y="68" width="553" height="100"/>
+				<subreportParameter name="Id"/>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JRXmlDataSource)
+    $P{REPORT_DATA_SOURCE}).subDataSource("/employee/currentpoints/currentpoint")]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ficha_ponto_det.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
 	<columnFooter>

@@ -20,3 +20,8 @@ Relatorios
   1. Faltosos
   2. Justificativas
     
+    
+    
+((net.sf.jasperreports.engine.data.JRXmlDataSource)$P{REPORT_DATA_SOURCE}).dataSource("employees/employee/points/point")
+((net.sf.jasperreports.engine.data.JRXmlDataSource)$P{REPORT_DATA_SOURCE}).dataSource("/employees/employee/current-points/current-point")
+((net.sf.jasperreports.engine.data.JRXmlDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("/employees/employee/current-points/current-point")

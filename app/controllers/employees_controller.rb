@@ -4,8 +4,7 @@ class EmployeesController < InheritedResources::Base
   has_scope :by_name
 
   def index
-    @employees = Employee.find(:all, :include => :points) #apply_scopes(Employee).all
-    respond_with @employees, :include => [ :points]
+    @employees = apply_scopes(Employee).all
   end
   
   def new
