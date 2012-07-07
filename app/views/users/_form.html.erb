@@ -1,5 +1,13 @@
-  <%= form.label :username %>
-  <%= form.text_field :username%>
-  <%= form.label :password %>
-  <%= form.password_field :password %>
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
 
+  <div class="form-inputs">
+  	<%= f.input :username%>
+  	<%= f.input :password%>
+  	<%= f.input :role, :collection => UserRole::ROLE_USER_LIST%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>

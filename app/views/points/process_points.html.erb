@@ -1,0 +1,16 @@
+<%= form_tag process_points_points_path, :method => :get, :class => "well"  do -%>
+
+<label>Empresa</label>
+<%= select_tag :by_enterprise, options_from_collection_for_select(Enterprise.order("name").all, "id", "name", params[:by_enterprise]), :include_blank => true  %>
+
+<label>Data inicial</label>
+<%= text_field_tag :date_start, '', :class => "datepicker" %>
+
+<label>Data final</label>
+<%= text_field_tag :date_end, '', :class => "datepicker" %>
+
+<button type="submit" class="btn">
+	<i class="icon-search"></i>
+</button>
+
+<% end -%>

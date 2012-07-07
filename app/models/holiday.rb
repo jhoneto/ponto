@@ -7,9 +7,8 @@ class Holiday < ActiveRecord::Base
 	scope :by_start_date, lambda {|parameter| where("date >= ?",  Date.parse(parameter).strftime('%Y-%m-%d'))}
 	scope :by_end_date, lambda {|parameter| where("date <= ?",  Date.parse(parameter).strftime('%Y-%m-%d'))}
 
-	def self.holiday?(date)
-		Holiday.find_by_date(date)
-		
+	def self.holiday?(enterprise_id, date)
+		Holiday.where("date = ? and (enterprise_id is null or enterprise_id = ?)", date.strftime('%Y-%m-%d'), enterprise_id).first
 	end
 
 end

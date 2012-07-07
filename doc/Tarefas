@@ -3,10 +3,10 @@ Colocar responsavel pelo departamento - OK
 Colocar horário de trabalho por empresa - OK
 Colocar feriado por empresa ou todas - OK
 Alterar cadastro do colaborador para mostrar apenas departamentos e horários da empresa - OK
-Imprimir a ficha de ponto por empresa/departamento
+Imprimir a ficha de ponto por empresa/departamento - OK
 Batida de ponto pelo SDK do fabricante do leitor
 
-Verificar jasper_rails(fortes)
+Cadastro de usuários - OK
 
 Incluir justificativa - OK
   - Empregado
@@ -14,11 +14,28 @@ Incluir justificativa - OK
   - Data final
   - Justificativa
   
-Verificar justificativas na ficha de ponto
+Verificar justificativas na ficha de ponto OK
 
 Relatorios
   1. Faltosos
   2. Justificativas
+  3. Ficha de ponto individual
+  4. Ajuste na folha de ponto
+    - Departamento
+    - Cargo
+    - Assinatura Colaborador
+    - Assinatura chefe do departamento
+    - Quebra de página por funcionario  
+  
+Cotroler de acesso
+  - Administrador
+  - Administrador ponto
+  - Cadastro
+  - Batida
+Parametrização
+  - Tipo do registro (leitor ou senha)
+  -
+Ajustar ponto
     
     
     

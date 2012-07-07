@@ -1,4 +1,6 @@
 Ponto::Application.routes.draw do
+  resources :users
+
   resources :justifications
 
   resources :departments
@@ -28,6 +30,7 @@ Ponto::Application.routes.draw do
 
   resources :points do
     collection do
+      get  'process_points'
       post 'save_fingerprint'
     end
   end

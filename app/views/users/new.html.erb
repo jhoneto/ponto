@@ -1,7 +1,5 @@
-<h2>Sign up</h2>
+<h2>Novo usuário</h2>
 
-<%= form_for @user do |form| %>
-  <%= render :partial => '/users/form', :object => form %>
-  <br>
-  <%= form.submit 'Cadastrar' %>
-<% end %>
+<%= render 'form' %>
+
+<%= link_to 'Voltar', users_path %>

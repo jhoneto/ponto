@@ -14,6 +14,7 @@ gem "clearance", "~> 0.16.3"
 gem "nested_form", "~> 0.2.1"
 gem "odf-report", "~> 0.4.4"
 gem "jasper-rails", "~> 0.1.2"
+gem "cancan", "~> 1.6.8"
 
 group :development, :test do
   gem 'rspec-rails'

@@ -11,12 +11,12 @@ class Point < ActiveRecord::Base
 
     xml.currentpoint do
       xml.date self.date.strftime("%d/%m/%Y")
-      xml.entry_1 self.entry_1.strftime("%R") unless self.entry_1.nil?
-      xml.exit_1 self.exit_1.strftime("%R") unless self.exit_1.nil?
-      xml.entry_2 self.entry_2.strftime("%R") unless self.entry_2.nil?
-      xml.exit_2 self.exit_2.strftime("%R") unless self.exit_2.nil?
-      xml.entry_3 self.entry_3.strftime("%R") unless self.entry_3.nil?
-      xml.exit_3 self.exit_3.strftime("%R") unless self.exit_3.nil?
+      xml.entry_1 self.entry_1.getlocal.strftime("%R") unless self.entry_1.nil?
+      xml.exit_1 self.exit_1.getlocal.strftime("%R") unless self.exit_1.nil?
+      xml.entry_2 self.entry_2.getlocal.strftime("%R") unless self.entry_2.nil?
+      xml.exit_2 self.exit_2.getlocal.strftime("%R") unless self.exit_2.nil?
+      xml.entry_3 self.entry_3.getlocal.strftime("%R") unless self.entry_3.nil?
+      xml.exit_3 self.exit_3.getlocal.strftime("%R") unless self.exit_3.nil?
     end
   end
 
@@ -109,6 +109,113 @@ class Point < ActiveRecord::Base
   #fingerprintDB = fingerprintDB.gsub(" ","")
 
   #IO.popen("java -jar #{Rails.root}/public/sgp-app-identify.jar #{fingerprintDB} #{fingerprintClient}").readlines
+  end
+
+  def self.process_point(enterprise_id, start_date, end_date)
+    current_date_time =  start_date
+    last_date_time = end_date
+    employees = Employee.where("status = 1 and enterprise_id = ?", enterprise_id)
+    employees.each do |e|
+      Point.delete_all("action >= 70 and employee_id = #{e.id}")
+      office_hour_items = e.office_hour.officehouritems
+      while current_date_time <= last_date_time do
+        current_hour_item = nil
+        office_hour_items.each do |hi|
+          if (hi.day == current_date_time.wday)
+          current_hour_item = hi
+          end
+        end
+        
+        point = Point.where("employee_id = ? and date = ?", e.id, current_date_time.strftime("%Y-%m-%d")).first
+        puts "########"
+        puts point.nil?
+        if point.nil?
+          point = Point.new
+          point.delay = 0
+          point.extra = 0
+          point.employee_id = e.id
+          point.date = current_date_time
+          if current_hour_item.nil?
+            point.action = "98" #FOLGA  
+            point.obs = "DOMIGO" if current_date_time.wday == 0
+            point.obs = "SABADO" if current_date_time.wday == 6
+          else 
+            point.action = 99 # FALTA
+            point.obs = "FALTA"
+          end
+          holiday = Holiday.holiday?(e.enterprise_id, current_date_time)
+          unless holiday.nil?
+            point.obs = holiday.name
+            point.action = 70 # FERIADO
+          end
+          if point.action == 99 
+            justification = Justification.get_justification(e.id, current_date_time)
+            unless justification.nil? 
+              point.obs = justification.description
+              point.action = 80 # FALTA JUSTIFICADA
+            end
+          end
+          point.save
+        elsif (point.action < 70)
+          delay = 0
+          extra = 0
+          point.obs = ""
+          if (!point.entry_1.nil?) && (((point.entry_1 - current_hour_item.entry_1) / 60) > e.office_hour.input_tolerance)
+            point.obs = point.obs + " | ENT.ATRASO"
+            point.action = 60
+            delay = delay + ((point.entry_1 - current_hour_item.entry_1) / 60)
+          elsif (!point.entry_1.nil?) && (((current_hour_item.entry_1 - point.entry_1) / 60) > e.office_hour.input_tolerance)
+            extra = extra + ((current_hour_item.entry_1 - point.entry_1) / 60) 
+          end
+          if (!point.entry_2.nil?) && (((point.entry_2 - current_hour_item.entry_2) / 60) > e.office_hour.input_tolerance)
+            point.obs = point.obs + " | ENT.ATRASO" unless point.action == 60
+            point.action = 60
+            delay = delay + ((point.entry_2 - current_hour_item.entry_2) / 60)
+          elsif (!point.entry_2.nil?) && (((current_hour_item.entry_2 - point.entry_2) / 60) > e.office_hour.input_tolerance)
+            extra = extra + ((current_hour_item.entry_1 - point.entry_1) / 60) 
+          end
+          if (!point.entry_3.nil?) && (((point.entry_3 - current_hour_item.entry_3) / 60) > e.office_hour.input_tolerance)
+            point.obs = point.obs + " | ENT.ATRASO" unless point.action == 60
+            point.action = 60
+            delay = delay + ((point.entry_3 - current_hour_item.entry_3) / 60)
+          elsif (!point.entry_3.nil?) && (((current_hour_item.entry_3 - point.entry_1) / 60) > e.office_hour.input_tolerance)
+            extra = extra + ((current_hour_item.entry_3 - point.entry_1) / 60) 
+          end
+          
+          
+          
+          if (!point.exit_1.nil?) && (((current_hour_item.exit_1 - point.exit_1) / 60) > e.office_hour.output_tolerance)
+            point.obs = point.obs + " | SAI.ANTEC."
+            point.action = 61
+            delay = delay + ((current_hour_item.exit_1 - point.exit_1) / 60)
+          elsif (!point.exit_1.nil?) && (((point.exit_1 - current_hour_item.exit_1) / 60) > e.office_hour.output_tolerance)
+            extra = extra + ((point.exit_1 - current_hour_item.exit_1) / 60)
+          end
+          
+          if (!point.exit_2.nil?) && (((current_hour_item.exit_2 - point.exit_2) / 60) > e.office_hour.output_tolerance)
+            point.obs = point.obs + " | SAI.ANTEC." unless point.action == 61
+            point.action = 61
+            delay = delay + ((current_hour_item.exit_2 - point.exit_2) / 60)
+          elsif (!point.exit_2.nil?) && (((point.exit_2 - current_hour_item.exit_2) / 60) > e.office_hour.output_tolerance)
+            extra = extra + ((point.exit_2 - current_hour_item.exit_2) / 60)
+          end
+          
+          if (!point.exit_3.nil?) && (((current_hour_item.exit_3 - point.exit_2) / 60) > e.office_hour.output_tolerance)
+            point.obs = point.obs + " | SAI.ANTEC." unless point.action == 61
+            point.action = 61
+            delay = delay + ((current_hour_item.exit_3 - point.exit_3) / 60)
+          elsif (!point.exit_3.nil?) && (((point.exit_3 - current_hour_item.exit_3) / 60) > e.office_hour.output_tolerance)
+            extra = extra + ((point.exit_3 - current_hour_item.exit_3) / 60)
+          end
+          point.delay = delay
+          point.extra = extra
+          point.save    
+        end
+        current_date_time = current_date_time + 1.day
+      end
+      current_date_time =  start_date
+    end
+    true
   end
 
   def self.prepare_card_point_single(employee, start_date, end_date)

@@ -1,0 +1,25 @@
+<h1>Lista de usuários</h1>
+<br>
+
+
+<table class="table table-bordered table-striped">
+  <tr>
+  	<th>Nome</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+  	<td><%= user.username %></td>
+    <td><%= link_to raw("<i class='icon-folder-open'></i>"), user, :class => "btn btn-mini", :title => "Mostar" %></td>
+    <td><%= link_to raw("<i class='icon-pencil'></i>"), edit_user_path(user), :class => "btn btn-mini", :title => "Editar" %></td>
+    <td><%= link_to raw("<i class='icon-remove-sign'></i>"), user, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td
+  </tr>
+<% end %>
+</table>
+
+<br />
+<%= link_to raw("<i class='icon-file'></i>Adicionar"), new_justification_path, :class => "btn", :title => "Adicionar" %>
+
