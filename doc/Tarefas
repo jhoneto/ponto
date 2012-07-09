@@ -27,11 +27,12 @@ Relatorios
     - Assinatura chefe do departamento
     - Quebra de página por funcionario  
   
-Cotroler de acesso
+Cotroler de acesso        OK
   - Administrador
   - Administrador ponto
   - Cadastro
   - Batida
+  
 Parametrização
   - Tipo do registro (leitor ou senha)
   -

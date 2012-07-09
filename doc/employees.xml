@@ -5,7 +5,7 @@
 <fingerprint nil="true"/>
 <cpf/>
 <sex/>
-<registry>0015</registry>
+<registry>001</registry>
 <password/>
 <enterprise-id type="integer">1</enterprise-id>
 <date-of-birth type="date" nil="true"/>
@@ -34,20 +34,144 @@
 <obs/>
 <created-at type="datetime">2012-07-01T16:41:18-03:00</created-at>
 <updated-at type="datetime">2012-07-02T15:12:32-03:00</updated-at>
-<currentpoints>
+<role>
+<id type="integer">1</id>
+<description>Analista de sistemas</description>
+<created-at type="datetime">2012-06-14T23:13:18-03:00</created-at>
+<updated-at type="datetime">2012-06-14T23:13:18-03:00</updated-at>
+</role>
+<department>
+<name>T.I</name>
+<boss>Hamilton Oliveira</boss>
+</department>
+<currentpoints type="array">
 <currentpoint>
-<id type="integer">3</id>
-<employee-id type="integer">1</employee-id>
-<date type="date">2012-06-05</date>
-<entry-1 type="datetime">2000-01-01T17:23:28-02:00</entry-1>
-<exit-1 type="datetime">2000-01-01T20:49:29-02:00</exit-1>
-<entry-2 type="datetime">2000-01-01T20:50:57-02:00</entry-2>
-<exit-2 type="datetime">2000-01-01T20:52:06-02:00</exit-2>
-<entry-3 type="datetime" nil="true"/>
-<exit-3 type="datetime" nil="true"/>
-<created-at type="datetime">2012-07-04T16:23:28-03:00</created-at>
-<updated-at type="datetime">2012-07-04T19:52:06-03:00</updated-at>
-<action type="integer">4</action>
+<date>09/07/2012</date>
+<entry_1>08:00</entry_1>
+<exit_1>12:00</exit_1>
+<entry_2>13:00</entry_2>
+<exit_2>17:20</exit_2>
+<obs>| ENT.ATRASO</obs>
+</currentpoint>
+<currentpoint>
+<date>01/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>02/07/2012</date>
+<obs>Doente</obs>
+</currentpoint>
+<currentpoint>
+<date>03/07/2012</date>
+<obs>Doente</obs>
+</currentpoint>
+<currentpoint>
+<date>04/07/2012</date>
+<obs>Teste</obs>
+</currentpoint>
+<currentpoint>
+<date>05/07/2012</date>
+<obs>Doente</obs>
+</currentpoint>
+<currentpoint>
+<date>06/07/2012</date>
+<obs>Doente</obs>
+</currentpoint>
+<currentpoint>
+<date>07/07/2012</date>
+<obs>SABADO</obs>
+</currentpoint>
+<currentpoint>
+<date>08/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>10/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>11/07/2012</date>
+<obs>Teste_emp_1</obs>
+</currentpoint>
+<currentpoint>
+<date>12/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>13/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>14/07/2012</date>
+<obs>SABADO</obs>
+</currentpoint>
+<currentpoint>
+<date>15/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>16/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>17/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>18/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>19/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>20/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>21/07/2012</date>
+<obs>SABADO</obs>
+</currentpoint>
+<currentpoint>
+<date>22/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>23/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>24/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>25/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>26/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>27/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>28/07/2012</date>
+<obs>SABADO</obs>
+</currentpoint>
+<currentpoint>
+<date>29/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>30/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>31/07/2012</date>
+<obs>FALTA</obs>
 </currentpoint>
 </currentpoints>
 </employee>
@@ -86,6 +210,141 @@
 <obs/>
 <created-at type="datetime">2012-07-03T21:38:05-03:00</created-at>
 <updated-at type="datetime">2012-07-03T21:38:05-03:00</updated-at>
-<currentpoints/>
+<role>
+<id type="integer">1</id>
+<description>Analista de sistemas</description>
+<created-at type="datetime">2012-06-14T23:13:18-03:00</created-at>
+<updated-at type="datetime">2012-06-14T23:13:18-03:00</updated-at>
+</role>
+<department>
+<name>T.I</name>
+<boss>Hamilton Oliveira</boss>
+</department>
+<currentpoints type="array">
+<currentpoint>
+<date>01/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>02/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>03/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>04/07/2012</date>
+<obs>Teste</obs>
+</currentpoint>
+<currentpoint>
+<date>05/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>06/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>07/07/2012</date>
+<obs>SABADO</obs>
+</currentpoint>
+<currentpoint>
+<date>08/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>09/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>10/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>11/07/2012</date>
+<obs>Teste_emp_1</obs>
+</currentpoint>
+<currentpoint>
+<date>12/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>13/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>14/07/2012</date>
+<obs>SABADO</obs>
+</currentpoint>
+<currentpoint>
+<date>15/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>16/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>17/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>18/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>19/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>20/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>21/07/2012</date>
+<obs>SABADO</obs>
+</currentpoint>
+<currentpoint>
+<date>22/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>23/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>24/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>25/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>26/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>27/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>28/07/2012</date>
+<obs>SABADO</obs>
+</currentpoint>
+<currentpoint>
+<date>29/07/2012</date>
+<obs>DOMIGO</obs>
+</currentpoint>
+<currentpoint>
+<date>30/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+<currentpoint>
+<date>31/07/2012</date>
+<obs>FALTA</obs>
+</currentpoint>
+</currentpoints>
 </employee>
 </employees>

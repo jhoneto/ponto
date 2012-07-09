@@ -17,6 +17,7 @@ class Point < ActiveRecord::Base
       xml.exit_2 self.exit_2.getlocal.strftime("%R") unless self.exit_2.nil?
       xml.entry_3 self.entry_3.getlocal.strftime("%R") unless self.entry_3.nil?
       xml.exit_3 self.exit_3.getlocal.strftime("%R") unless self.exit_3.nil?
+      xml.obs self.obs unless self.obs.nil?
     end
   end
 

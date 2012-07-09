@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
   respond_to :html, :xml, :json, :pdf
  
 
@@ -9,6 +9,9 @@ class ReportsController < ApplicationController
   end
 
   def filter_ficha_ponto
+    if current_user.role == 4
+      redirect_to(root_path, :notice => "Acesso nao permitido")
+    end
   end
 
   def ficha_ponto
@@ -19,6 +22,6 @@ class ReportsController < ApplicationController
       e.date1 = date1
       e.date2 = date2
     end
-    respond_with @employees, :include => [:currentpoints]
+    respond_with @employees, :include => [:role, :department, :currentpoints]
   end
 end

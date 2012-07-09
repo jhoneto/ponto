@@ -9,6 +9,9 @@ class Employee < ActiveRecord::Base
 
   attr_accessor :date1
   attr_accessor :date2
+  attr_accessor :department_name
+  attr_accessor :role_name
+  attr_accessor :employee_department
 
   scope :by_name, lambda {|parameter| where("upper(name) like upper(?)", "%#{parameter}%")}
 
@@ -24,6 +27,8 @@ class Employee < ActiveRecord::Base
   def init
     self.status  ||= 1
   end
+  
+  
 
   def self.save_fingerprint(registry, fingerprint)
     employee = Employee.find_by_registry(registry)
