@@ -17,7 +17,11 @@ class ReportsController < ApplicationController
   def ficha_ponto
     date1 = params[:date_start].to_date.strftime("%Y-%m-%d")
     date2 = params[:date_end].to_date.strftime("%Y-%m-%d")
-    @employees = Employee.where("enterprise_id = ? and department_id = ?", params[:by_enterprise], params[:by_department])
+    if params[:by_employee_id].nil?
+      @employees = Employee.where("enterprise_id = ? and department_id = ?", params[:by_enterprise], params[:by_department])
+    else
+      @employees = Employee.where("id = ?", params[:by_employee_id])
+    end
     @employees.each do |e|
       e.date1 = date1
       e.date2 = date2

@@ -13,23 +13,34 @@
 
 	$(function() {
 		$('#fp_form').submit(function() {
+			var employee = $('#by_employee_id :selected').val();
 			var enterprise = $('#by_enterprise :selected').val();
 			var department = $('#by_department :selected').val();
 			var date_start = $('#date_start').val();
 			var date_end = $('#date_end').val();
-			location.href = "/reports/ficha_ponto.pdf?by_enterprise=" + enterprise + "&by_department=" + department + "&date_start=" + date_start + "&date_end=" + date_end;
+			var by_employee = $('#by_employee').val();
+			if (by_employee == 'true') {
+				location.href = "/reports/ficha_ponto.pdf?by_employee_id=" + employee + "&date_start=" + date_start + "&date_end=" + date_end;
+			}else{
+				location.href = "/reports/ficha_ponto.pdf?by_enterprise=" + enterprise + "&by_department=" + department + "&date_start=" + date_start + "&date_end=" + date_end;
+			};
 			return false;
 		});
 	}); 
 </script>
 <%= form_tag ficha_ponto_reports_path, :remote => true, :multipart=>true, :format => :pdf, :method => :get, :class => "well", :id => "fp_form"  do -%>
+<%= hidden_field_tag :by_employee, params[:by_employee]%>
 
+<% if params[:by_employee] =='true' %>
+<label>Colaborador</label>
+<%= select_tag :by_employee_id, options_from_collection_for_select(Employee.order("name").all, "id", "name", params[:by_employee_id]), :include_blank => true   %>
+<% else %>
 <label>Empresa</label>
 <%= select_tag :by_enterprise, options_from_collection_for_select(Enterprise.order("name").all, "id", "name", params[:by_enterprise]), :include_blank => true, :onChange => "load_others_collections()"   %>
 
 <label>Departamento</label>
 <%= select_tag :by_department,[]  %>
-
+<% end %>
 <label>Data inicial</label>
 <%= text_field_tag :date_start, '', :class => "datepicker" %>
 
@@ -42,4 +53,3 @@
 
 <% end -%>
 
-<a href="/reports/ficha_ponto.pdf?by_enterprise=1&by_department=1&date_start=01/07/2012&date_end=30/07/2012">TESTE</a>
