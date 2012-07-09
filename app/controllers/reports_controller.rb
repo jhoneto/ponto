@@ -21,7 +21,9 @@ class ReportsController < ApplicationController
     @employees.each do |e|
       e.date1 = date1
       e.date2 = date2
+      e.delay, e.delay_number, e.extra, e.faults = Point.total_delay_extra(e.id, params[:date_start].to_date, params[:date_end].to_date)
     end
-    respond_with @employees, :include => [:role, :department, :currentpoints]
+    @teste = "TESTE"
+    respond_with @employees, :methods => [:delay, :delay_number, :extra, :faults], :include => [:role, :department, :currentpoints]
   end
 end

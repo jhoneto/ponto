@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class Point < ActiveRecord::Base
+  default_scope :order => 'date ASC'
   validates_presence_of :employee_id
   validates_presence_of :date
 
@@ -18,7 +19,32 @@ class Point < ActiveRecord::Base
       xml.entry_3 self.entry_3.getlocal.strftime("%R") unless self.entry_3.nil?
       xml.exit_3 self.exit_3.getlocal.strftime("%R") unless self.exit_3.nil?
       xml.obs self.obs unless self.obs.nil?
+      xml.delay self.delay unless self.delay.nil?
+      xml.extra self.extra unless self.extra.nil?
     end
+  end
+  
+  def self.total_delay_extra(employee_id, start_date, end_date)
+    points = Point.where("employee_id = ? and date between ? and ?", employee_id, start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d"))
+    delay = 0
+    extra = 0
+    faults = 0
+    delay_number = 0
+    points.each do |p|
+      unless p.delay.nil?
+        delay = delay + p.delay
+        delay_number = delay_number + 1 unless p.delay == 0
+      end       
+      extra = extra + p.extra unless p.extra.nil?
+      if p.action == 99
+        faults = faults + 1
+      end
+    end
+    delay_time = Time.now().change(:hour => 0, :min => 0, :second => 0)
+    extra_time = Time.now().change(:hour => 0, :min => 0, :second => 0)
+    delay_time = delay_time + delay.minute
+    extra_time = extra_time + extra.minute
+    return delay_time.strftime("%R"), delay_number, extra_time.strftime("%R"), faults
   end
 
   def self.save_point(fingerprint, employee_registry)

@@ -71,6 +71,18 @@
 	<field name="boss" class="java.lang.String">
 		<fieldDescription><![CDATA[department/boss]]></fieldDescription>
 	</field>
+	<field name="delay" class="java.lang.String">
+		<fieldDescription><![CDATA[delay]]></fieldDescription>
+	</field>
+	<field name="delay_number" class="java.lang.String">
+		<fieldDescription><![CDATA[delay-number]]></fieldDescription>
+	</field>
+	<field name="extra" class="java.lang.String">
+		<fieldDescription><![CDATA[extra]]></fieldDescription>
+	</field>
+	<field name="faults" class="java.lang.String">
+		<fieldDescription><![CDATA[faults]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -94,7 +106,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="46" splitType="Stretch">
+		<band height="126" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="2ee17133-cacf-46e0-b642-7312a4cb98a0" x="0" y="0" width="100" height="15"/>
 				<textElement>
@@ -152,31 +164,73 @@
 				<textFieldExpression><![CDATA[$F{department}]]></textFieldExpression>
 			</textField>
 			<break>
-				<reportElement uuid="06644bb8-4fec-4024-b0ac-4c6225b0787c" x="0" y="45" width="100" height="1"/>
+				<reportElement uuid="06644bb8-4fec-4024-b0ac-4c6225b0787c" x="0" y="125" width="100" height="1"/>
 			</break>
+			<staticText>
+				<reportElement uuid="2ee17133-cacf-46e0-b642-7312a4cb98a0" positionType="Float" x="0" y="56" width="127" height="15"/>
+				<textElement>
+					<font fontName="Courier New"/>
+				</textElement>
+				<text><![CDATA[Atrasos.............]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="92cd9228-1ef8-47c2-8c17-4125f1129702" positionType="Float" x="127" y="56" width="167" height="15"/>
+				<textElement>
+					<font fontName="Courier New"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{delay_number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="92cd9228-1ef8-47c2-8c17-4125f1129702" positionType="Float" x="127" y="71" width="167" height="15"/>
+				<textElement>
+					<font fontName="Courier New"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{delay}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2ee17133-cacf-46e0-b642-7312a4cb98a0" positionType="Float" x="0" y="71" width="127" height="15"/>
+				<textElement>
+					<font fontName="Courier New"/>
+				</textElement>
+				<text><![CDATA[Tempo de atraso.....]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="92cd9228-1ef8-47c2-8c17-4125f1129702" positionType="Float" x="127" y="86" width="167" height="15"/>
+				<textElement>
+					<font fontName="Courier New"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{faults}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2ee17133-cacf-46e0-b642-7312a4cb98a0" positionType="Float" x="1" y="86" width="127" height="15"/>
+				<textElement>
+					<font fontName="Courier New"/>
+				</textElement>
+				<text><![CDATA[Faltas..............]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="97" splitType="Stretch">
+		<band height="46" splitType="Stretch">
 			<textField>
-				<reportElement uuid="875da1be-6140-4e2b-8788-b835d73c04c7" x="63" y="25" width="100" height="20"/>
+				<reportElement uuid="875da1be-6140-4e2b-8788-b835d73c04c7" x="63" y="26" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="f91aac5b-5636-4737-b144-bc56db228e3a" x="367" y="24" width="100" height="20"/>
+				<reportElement uuid="f91aac5b-5636-4737-b144-bc56db228e3a" x="367" y="25" width="100" height="20"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Courier New"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{boss}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement uuid="043c89e8-f50d-400e-8dbb-e68f6e32f8ca" x="18" y="23" width="223" height="1"/>
+				<reportElement uuid="043c89e8-f50d-400e-8dbb-e68f6e32f8ca" x="18" y="24" width="223" height="1"/>
 			</line>
 			<line>
-				<reportElement uuid="e9dac9df-e50b-42a6-9e0e-713581b54744" x="290" y="22" width="223" height="1"/>
+				<reportElement uuid="e9dac9df-e50b-42a6-9e0e-713581b54744" x="290" y="23" width="223" height="1"/>
 			</line>
 		</band>
 	</columnFooter>

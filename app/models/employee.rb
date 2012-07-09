@@ -9,9 +9,10 @@ class Employee < ActiveRecord::Base
 
   attr_accessor :date1
   attr_accessor :date2
-  attr_accessor :department_name
-  attr_accessor :role_name
-  attr_accessor :employee_department
+  attr_accessor :delay
+  attr_accessor :extra
+  attr_accessor :faults
+  attr_accessor :delay_number
 
   scope :by_name, lambda {|parameter| where("upper(name) like upper(?)", "%#{parameter}%")}
 
