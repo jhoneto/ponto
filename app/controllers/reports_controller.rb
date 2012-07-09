@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   #load_and_authorize_resource
-  respond_to :html, :xml, :json, :pdf
+  respond_to :html, :xml, :pdf
  
 
   def index
@@ -23,7 +23,9 @@ class ReportsController < ApplicationController
       e.date2 = date2
       e.delay, e.delay_number, e.extra, e.faults = Point.total_delay_extra(e.id, params[:date_start].to_date, params[:date_end].to_date)
     end
-    @teste = "TESTE"
+
     respond_with @employees, :methods => [:delay, :delay_number, :extra, :faults], :include => [:role, :department, :currentpoints]
+    
+    
   end
 end
