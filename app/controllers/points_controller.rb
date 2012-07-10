@@ -5,9 +5,11 @@ class PointsController < InheritedResources::Base
   has_scope :by_employee
   has_scope :by_start_date
   has_scope :by_end_date
+  
+  
 
   def index
-    @points = apply_scopes(Point).all
+    @points = apply_scopes(Point).paginate(:page => params[:page])
   end
   
   
