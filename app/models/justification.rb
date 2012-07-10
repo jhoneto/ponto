@@ -1,5 +1,5 @@
 class Justification < ActiveRecord::Base
-
+  default_scope :order => 'start_date ASC'
   belongs_to :employee, :class_name => "Employee", :foreign_key => "employee_id"
   
   validates_presence_of :description

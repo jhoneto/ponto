@@ -19,7 +19,7 @@ Verificar justificativas na ficha de ponto OK
 Relatorios
   1. Faltosos
   2. Justificativas
-  3. Ficha de ponto individual
+  3. Ficha de ponto individual OK
   4. Ajuste na folha de ponto OK
     - Departamento
     - Cargo
@@ -37,6 +37,8 @@ Parametrização
   - Tipo do registro (leitor ou senha)
   -
 Ajustar ponto
+
+Paginação?
     
     
     

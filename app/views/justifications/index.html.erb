@@ -1,40 +1,55 @@
+<script>
+	$(function() {
+		$('#btn_pdf').click(function() {
+			var date_start = $('#by_start_date').val();
+			var date_end = $('#by_end_date').val();
+			var by_employee = $('#by_employee').val();
+			location.href = "/justifications.pdf?by_employee=" + by_employee + "&date_start=" + date_start + "&date_end=" + date_end;
+            return false;
+		});
+	}); 
+</script>
+
 <h1>Lista de justificativas</h1>
 <br>
 
 <%= form_tag justifications_path, :method => :get, :class => "well form-inline"  do -%>
-  <label>Nome</label>
-  <%= select_tag :by_employee, options_from_collection_for_select(Employee.order("name").all, "id", "name", params[:by_employee]), :include_blank => true  %>
-  <label>Período</label>
-  <%= text_field_tag :by_start_date, params[:by_start_date], :class => "datepicker" %>
-  <%= text_field_tag :by_end_date, params[:by_end_date], :class => "datepicker" %>
-  <button type="submit" class="btn"><i class="icon-search"></i></button>
+<label>Nome</label>
+<%= select_tag :by_employee, options_from_collection_for_select(Employee.order("name").all, "id", "name", params[:by_employee]), :include_blank => true  %>
+<label>Período</label>
+<%= text_field_tag :by_start_date, params[:by_start_date], :class => "datepicker" %>
+<%= text_field_tag :by_end_date, params[:by_end_date], :class => "datepicker" %>
+<button type="submit" class="btn">
+	<i class="icon-search"></i>
+</button>
 <% end -%>
 
 <table class="table table-bordered table-striped">
-  <tr>
-  	<th>Matrícula</th>
-    <th>Nome</th>
-    <th>Description</th>
-    <th>Start date</th>
-    <th>End date</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+	<tr>
+		<th>Matrícula</th>
+		<th>Nome</th>
+		<th>Description</th>
+		<th>Start date</th>
+		<th>End date</th>
+		<th></th>
+		<th></th>
+		<th></th>
+	</tr>
 
-<% @justifications.each do |justification| %>
-  <tr>
-  	<td><%= justification.employee.registry %></td>
-    <td><%= justification.employee.name %></td>
-    <td><%= justification.description %></td>
-    <td><%= justification.start_date %></td>
-    <td><%= justification.end_date %></td>
-    <td><%= link_to raw("<i class='icon-folder-open'></i>"), justification, :class => "btn btn-mini", :title => "Mostar" %></td>
-    <td><%= link_to raw("<i class='icon-pencil'></i>"), edit_justification_path(justification), :class => "btn btn-mini", :title => "Editar" %></td>
-    <td><%= link_to raw("<i class='icon-remove-sign'></i>"), justification, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td
-  </tr>
-<% end %>
+	<% @justifications.each do |justification| %>
+	<tr>
+		<td><%= justification.employee.registry %></td>
+		<td><%= justification.employee.name %></td>
+		<td><%= justification.description %></td>
+		<td><%= justification.start_date %></td>
+		<td><%= justification.end_date %></td>
+		<td><%= link_to raw("<i class='icon-folder-open'></i>"), justification, :class => "btn btn-mini", :title => "Mostar" %></td>
+		<td><%= link_to raw("<i class='icon-pencil'></i>"), edit_justification_path(justification), :class => "btn btn-mini", :title => "Editar" %></td>
+		<td><%= link_to raw("<i class='icon-remove-sign'></i>"), justification, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td
+	</tr>
+	<% end %>
 </table>
 
 <br />
 <%= link_to raw("<i class='icon-file'></i>Adicionar"), new_justification_path, :class => "btn", :title => "Adicionar" %>
+<%= link_to raw("<i class='icon-print'></i>PDF"), justifications_path, :class => "btn", :title => "PDF", :id => "btn_pdf" %> 
