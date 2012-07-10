@@ -1,0 +1,25 @@
+<h1>Editar registro de ponto</h1>
+
+<%= simple_form_for(@point) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+  	<label>Colaborador</label>
+    <%= text_field_tag :employee, @point.employee.registry + "-" + @point.employee.name, :readonly => true %>
+    <label>Data</label>
+    <%= text_field_tag :date, @point.date.strftime("%d/%m/%Y"), :readonly => true %>
+    <%= f.input :entry_1, :as => :string, :input_html => { :class => 'time'} %>
+    <%= f.input :exit_1, :as => :string, :input_html => { :class => 'time'} %>
+    <%= f.input :entry_2, :as => :string, :input_html => { :class => 'time'} %>
+    <%= f.input :exit_2, :as => :string, :input_html => { :class => 'time'} %>
+    <%= f.input :entry_3, :as => :string, :input_html => { :class => 'time'} %>
+    <%= f.input :exit_3, :as => :string, :input_html => { :class => 'time'} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Salvar" %>
+  </div>
+<% end %>
+
+
+<%= link_to 'Voltar', points_path %>

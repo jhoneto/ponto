@@ -5,6 +5,13 @@ class Point < ActiveRecord::Base
   validates_presence_of :date
 
   scope :period, lambda {|p1, p2| where("date between ? and ?", p1, p2)}
+  scope :by_employee, lambda {|parameter| where("employee_id = ?", parameter)}
+  scope :by_start_date, lambda {|parameter| where("date >= ?",  Date.parse(parameter).strftime('%Y-%m-%d'))}
+  scope :by_end_date, lambda {|parameter| where("date <= ?",  Date.parse(parameter).strftime('%Y-%m-%d'))}
+  
+  belongs_to :employee, :class_name => "Employee", :foreign_key => "employee_id"
+  
+  
   def to_xml(options = {})
     options[:indent] ||= 2
     xml = options[:builder] ||= Builder::XmlMarkup.new(:indent => options[:indent])

@@ -1,49 +1,49 @@
-<script>
-	function fingerprint(fg) {
-		var id = $('#employee_registry').val();
-		var option = $('input:radio[name=action]:checked').val();
-		if(option == 'save') {
-			$.post('/points/save_fingerprint', {
-				id : id,
-				template : fg
-			});
-		} else {
-			$.post('/points', {
-				id : id,
-				template : fg
-			});
-		}
+<h1>Lista de registro de ponto</h1>
+<br>
 
-	}
+<%= form_tag points_path, :method => :get, :class => "well form-inline"  do -%>
+<label>Nome</label>
+<%= select_tag :by_employee, options_from_collection_for_select(Employee.order("name").all, "id", "name", params[:by_employee]), :include_blank => true  %>
+<label>Período</label>
+<%= text_field_tag :by_start_date, params[:by_start_date], :class => "datepicker" %>
+<%= text_field_tag :by_end_date, params[:by_end_date], :class => "datepicker" %>
+<button type="submit" class="btn">
+	<i class="icon-search"></i>
+</button>
+<% end -%>
 
-	function send_point() {
-		var id = $('#employee_registry').val();
-		$.post('/points', {
-			id : id,
-			template : "XXXXXXXXXX"
-		});
-	}
-</script>
+<table class="table table-bordered table-striped">
+	<tr>
+		<th>Matrícula</th>
+		<th>Nome</th>
+		<th>Data</th>
+		<th>Entrada 1</th>
+		<th>Saída 1</th>
+		<th>Entrada 2</th>
+		<th>Saída 2</th>
+		<th>Entrada 3</th>
+		<th>Saída 3</th>
+		<th>Obs.</th>
+		<th></th>
+		<th></th>
+	</tr>
 
-<div id="retorno_ponto"></div>
+	<% @points.each do |point| %>
+	<tr>
+		<td><%= point.employee.registry %></td>
+		<td><%= point.employee.name %></td>
+		<td><%= point.date.strftime("%d/%m/%Y") %></td>
+		<td><%= point.entry_1.strftime("%R") unless point.entry_1.nil? %></td>
+		<td><%= point.exit_1.strftime("%R") unless point.exit_1.nil? %></td>
+		<td><%= point.entry_2.strftime("%R") unless point.entry_2.nil? %></td>
+		<td><%= point.exit_2.strftime("%R") unless point.exit_2.nil? %></td>
+		<td><%= point.entry_3.strftime("%R") unless point.entry_3.nil? %></td>
+		<td><%= point.exit_3.strftime("%R") unless point.exit_3.nil? %></td>
+		<td><%= point.obs %></td>
+		<td><%= link_to raw("<i class='icon-pencil'></i>"), edit_point_path(point), :class => "btn btn-mini", :title => "Editar" %></td>
+		<td><%= link_to raw("<i class='icon-remove-sign'></i>"), point, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td
+	</tr>
+	<% end %>
+</table>
 
-<div class="well" style="padding-left:30%">
-	<label class="radio">
-		<input type="radio" name="action" value="registry" checked />
-		Registrar ponto </label>
-	<label class="radio">
-		<input type="radio" name="action" value="save" />
-		Cadastrar digital </label>
-
-	<label>Matrícula</label>
-	<%= text_field_tag :employee_registry%>
-	<label>Digital</label>
-	<%= hidden_field_tag :fingerprint%>
-	<button id="btn_send" onclick="send_point()">
-		Registrar
-	</button>
-	<applet  code="br/gov/ce/ipmfor/sgp/FormMain.class"  archive="/sgp-identify.jar"  width="400"  height="450">
-		Seu browser não suporta applets
-	</applet>
-
-</div>
+<br />

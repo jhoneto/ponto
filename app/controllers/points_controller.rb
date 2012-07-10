@@ -1,9 +1,27 @@
 class PointsController < InheritedResources::Base
   load_and_authorize_resource
   respond_to :html, :xml, :json
+  
+  has_scope :by_employee
+  has_scope :by_start_date
+  has_scope :by_end_date
+
+  def index
+    @points = apply_scopes(Point).all
+  end
+  
+  
   def create
     retorno = Point.save_point(params[:template], params[:id])
     @msg = "<div class='alert alert-success'> " +retorno + "</div>"
+  end
+  
+  def update
+    update!{ points_path }
+  end
+  
+  def destroy
+    destroy!{points_path}
   end
 
   def save_fingerprint
