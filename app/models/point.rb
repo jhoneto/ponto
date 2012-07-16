@@ -130,19 +130,19 @@ class Point < ActiveRecord::Base
   end
 
   def self.validate_fingerprint(fingerprint, employee)
-    r = []
-    r << "OK"
-  #fingerprintClient = fingerprint
-  #fingerprintClient = fingerprintClient.gsub(/\n/,"")
-  #fingerprintClient = fingerprintClient.gsub(/\r/,"")
-  #fingerprintClient = fingerprintClient.gsub(" ","")
+    #r = []
+    #r << "OK"
+   fingerprintClient = fingerprint
+   fingerprintClient = fingerprintClient.gsub(/\n/,"")
+   fingerprintClient = fingerprintClient.gsub(/\r/,"")
+   fingerprintClient = fingerprintClient.gsub(" ","")
 
-  #fingerprintDB = employee.fingerprint
-  #fingerprintDB = fingerprintDB.gsub(/\n/,"")
-  #fingerprintDB = fingerprintDB.gsub(/\r/,"")
-  #fingerprintDB = fingerprintDB.gsub(" ","")
+   fingerprintDB = employee.fingerprint
+   fingerprintDB = fingerprintDB.gsub(/\n/,"")
+   fingerprintDB = fingerprintDB.gsub(/\r/,"")
+   fingerprintDB = fingerprintDB.gsub(" ","")
 
-  #IO.popen("java -jar #{Rails.root}/public/sgp-app-identify.jar #{fingerprintDB} #{fingerprintClient}").readlines
+   IO.popen("java -jar #{Rails.root}/public/sgp-digitalpersona-app.jar #{fingerprintDB} #{fingerprintClient}").readlines
   end
 
   def self.process_point(enterprise_id, start_date, end_date)
