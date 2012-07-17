@@ -17,6 +17,7 @@ gem "odf-report", "~> 0.4.4"
 gem "cancan", "~> 1.6.8"
 gem "will_paginate", "~> 3.0.3"
 gem "will_paginate-bootstrap", "~> 0.2.1"
+gem "ffi", "~> 1.0.11"
 
 group :development, :test do
   gem 'rspec-rails'

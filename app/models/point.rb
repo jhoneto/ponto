@@ -1,4 +1,7 @@
 # encoding: UTF-8
+require 'ffi'
+require 'digital_persona'
+
 class Point < ActiveRecord::Base
   default_scope :order => 'date ASC'
   validates_presence_of :employee_id
@@ -10,6 +13,19 @@ class Point < ActiveRecord::Base
   scope :by_end_date, lambda {|parameter| where("date <= ?",  Date.parse(parameter).strftime('%Y-%m-%d'))}
   
   belongs_to :employee, :class_name => "Employee", :foreign_key => "employee_id"
+
+  def self.soma
+    c = DigitalPersona.soma(42, 8)
+    puts "****************************************"
+    puts c
+  end
+
+  def self.check_fingerprint
+    puts "*************************"
+    e = Employee.find_by_registry('001')
+    c = DigitalPersona.check_fingerprint(e.fingerprint, e.fingerprint.length, e.fingerprint, e.fingerprint.length)
+    puts c
+  end
   
   
   def to_xml(options = {})
