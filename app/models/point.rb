@@ -1,6 +1,6 @@
 # encoding: UTF-8
-require 'ffi'
-require 'digital_persona'
+#require 'ffi'
+#require 'digital_persona'
 
 class Point < ActiveRecord::Base
   default_scope :order => 'date ASC'
@@ -15,16 +15,23 @@ class Point < ActiveRecord::Base
   belongs_to :employee, :class_name => "Employee", :foreign_key => "employee_id"
 
   def self.soma
-    c = DigitalPersona.soma(42, 8)
-    puts "****************************************"
-    puts c
+    #c = DigitalPersona.soma(42, 8)
+    #puts "****************************************"
+    #puts c
   end
 
   def self.check_fingerprint
-    puts "*************************"
-    e = Employee.find_by_registry('001')
-    c = DigitalPersona.check_fingerprint(e.fingerprint, e.fingerprint.length, e.fingerprint, e.fingerprint.length)
-    puts c
+    e = Employee.find_by_registry('001');
+    fingerprintClient = e.fingerprint
+    fingerprintClient = fingerprintClient.gsub(/\n/,"")
+    fingerprintClient = fingerprintClient.gsub(/\r/,"")
+    fingerprintClient = fingerprintClient.gsub(" ","")
+    puts fingerprintClient
+    #c = IO.popen ("./UareUSample #{fingerprintClient} #{fingerprintClient}")
+    c = IO.popen("java -jar #{Rails.root}/public/sgp-digitalpersona-app.jar #{fingerprintClient} #{fingerprintClient}").readlines
+    puts c.readlines
+    #check_results = system("#{Rails.root}/public/ ./UareUSample")
+    #puts check_results # => 'OK!'
   end
   
   
@@ -157,6 +164,12 @@ class Point < ActiveRecord::Base
    fingerprintDB = fingerprintDB.gsub(/\n/,"")
    fingerprintDB = fingerprintDB.gsub(/\r/,"")
    fingerprintDB = fingerprintDB.gsub(" ","")
+
+   puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+   puts fingerprintDB
+   puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+   puts fingerprintClient
+   puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 
    IO.popen("java -jar #{Rails.root}/public/sgp-digitalpersona-app.jar #{fingerprintDB} #{fingerprintClient}").readlines
   end
