@@ -5,7 +5,9 @@ class ApplicationController < ActionController::Base
   #check_authorization :unless => :session_controller?
   
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    puts "#################################"
+    flash[:error] = "Acesso negado"
+    redirect_to root_url
   end
 
   def authenticate(params)

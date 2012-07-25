@@ -1,4 +1,7 @@
 # encoding: UTF-8
+#require 'ffi'
+#require 'digital_persona'
+
 class Point < ActiveRecord::Base
   default_scope :order => 'date ASC'
   validates_presence_of :employee_id
@@ -10,6 +13,26 @@ class Point < ActiveRecord::Base
   scope :by_end_date, lambda {|parameter| where("date <= ?",  Date.parse(parameter).strftime('%Y-%m-%d'))}
   
   belongs_to :employee, :class_name => "Employee", :foreign_key => "employee_id"
+
+  def self.soma
+    #c = DigitalPersona.soma(42, 8)
+    #puts "****************************************"
+    #puts c
+  end
+
+  def self.check_fingerprint
+    e = Employee.find_by_registry('001');
+    fingerprintClient = e.fingerprint
+    fingerprintClient = fingerprintClient.gsub(/\n/,"")
+    fingerprintClient = fingerprintClient.gsub(/\r/,"")
+    fingerprintClient = fingerprintClient.gsub(" ","")
+    puts fingerprintClient
+    #c = IO.popen ("./UareUSample #{fingerprintClient} #{fingerprintClient}")
+    c = IO.popen("java -jar #{Rails.root}/public/sgp-digitalpersona-app.jar #{fingerprintClient} #{fingerprintClient}").readlines
+    puts c.readlines
+    #check_results = system("#{Rails.root}/public/ ./UareUSample")
+    #puts check_results # => 'OK!'
+  end
   
   
   def to_xml(options = {})
@@ -130,19 +153,25 @@ class Point < ActiveRecord::Base
   end
 
   def self.validate_fingerprint(fingerprint, employee)
-    r = []
-    r << "OK"
-  #fingerprintClient = fingerprint
-  #fingerprintClient = fingerprintClient.gsub(/\n/,"")
-  #fingerprintClient = fingerprintClient.gsub(/\r/,"")
-  #fingerprintClient = fingerprintClient.gsub(" ","")
+    #r = []
+    #r << "OK"
+   fingerprintClient = fingerprint
+   fingerprintClient = fingerprintClient.gsub(/\n/,"")
+   fingerprintClient = fingerprintClient.gsub(/\r/,"")
+   fingerprintClient = fingerprintClient.gsub(" ","")
 
-  #fingerprintDB = employee.fingerprint
-  #fingerprintDB = fingerprintDB.gsub(/\n/,"")
-  #fingerprintDB = fingerprintDB.gsub(/\r/,"")
-  #fingerprintDB = fingerprintDB.gsub(" ","")
+   fingerprintDB = employee.fingerprint
+   fingerprintDB = fingerprintDB.gsub(/\n/,"")
+   fingerprintDB = fingerprintDB.gsub(/\r/,"")
+   fingerprintDB = fingerprintDB.gsub(" ","")
 
-  #IO.popen("java -jar #{Rails.root}/public/sgp-app-identify.jar #{fingerprintDB} #{fingerprintClient}").readlines
+   puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+   puts fingerprintDB
+   puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+   puts fingerprintClient
+   puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+
+   IO.popen("java -jar #{Rails.root}/public/sgp-digitalpersona-app.jar #{fingerprintDB} #{fingerprintClient}").readlines
   end
 
   def self.process_point(enterprise_id, start_date, end_date)
