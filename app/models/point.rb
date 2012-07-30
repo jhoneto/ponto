@@ -76,6 +76,24 @@ class Point < ActiveRecord::Base
     extra_time = extra_time + extra.minute
     return delay_time.strftime("%R"), delay_number, extra_time.strftime("%R"), faults
   end
+  
+  def self.save_point_password(employee_registry, employee_password)
+    employee = Employee.find_by_registry_and_password(employee_registry, employee_password)
+    if employee.nil?
+      "Colaborador nao identifcado"
+    else
+      old_point = get_current_point(employee)
+        if old_point.nil?
+          registry_input(old_point, employee)
+        else
+          if (old_point.action % 2) > 0
+            registry_output(old_point, employee)
+          else
+            registry_input(old_point, employee)
+          end
+        end
+    end
+  end
 
   def self.save_point(fingerprint, employee_registry)
     employee = Employee.find_by_registry(employee_registry)

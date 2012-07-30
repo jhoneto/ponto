@@ -14,9 +14,7 @@ class PointsController < InheritedResources::Base
   
   
   def create
-    retorno = Point.save_point(params[:template], params[:id])
-    puts "44444444444444444444444444"
-    puts retorno
+    retorno = Point.save_point_password(params[:id], params[:password])
     @msg = "<div class='alert alert-success'> " + retorno + "</div>"
   end
   

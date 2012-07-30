@@ -6,4 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(:username => "admin", :password => "admin")
+#User.create(:username => "admin", :password => "admin")
+Parameter.create(:auth_type => "registry_and_fingerprint")
