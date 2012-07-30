@@ -1,0 +1,27 @@
+<script>
+	function fingerprint(fg) {
+		var id = $('#employee_registry').val();
+		$.post('/points/save_fingerprint', {
+			id : id,
+			template : fg
+		});
+	}
+</script>
+
+<div id="retorno_ponto"></div>
+
+<div class="well" style="padding-left:30%">
+
+	<label>Matrícula</label>
+	<%= text_field_tag :employee_registry%>
+	<label>Digital</label>
+	<%= hidden_field_tag :fingerprint%>
+	<applet
+	code="br/gov/ce/ipmfor/sgp/FormMain.class"
+	archive="/sgp-digitalpersona-applet-verify.jar"
+	width="400"
+	height="450">
+		Seu browser não suporta applets
+	</applet>
+
+</div>
