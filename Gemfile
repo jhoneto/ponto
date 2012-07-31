@@ -17,7 +17,7 @@ gem "odf-report", "~> 0.4.4"
 gem "cancan", "~> 1.6.8"
 gem "will_paginate", "~> 3.0.3"
 gem "will_paginate-bootstrap", "~> 0.2.1"
-gem "ffi", "~> 1.0.11"
+gem 'bootstrap-sass', '~> 2.0.3'
 #gem "sqlite3-ruby" 
 
 group :development, :test do
@@ -31,7 +31,6 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.1.5'
   gem 'coffee-rails', '~> 3.1.1'
-  gem 'bootstrap-sass', '~> 2.0.3'
   gem 'jquery-ui-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
