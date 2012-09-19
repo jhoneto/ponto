@@ -1,0 +1,61 @@
+unit uSecugen;
+
+interface
+
+type
+  TItiumSecugen = class
+  private
+    objSecuBsp : variant;
+    erro_code : integer;
+  public
+    function inicializar_leitor(var erro :string) : boolean;
+    function capturar(var digital : string; var erro :string; var cancelado : boolean) : boolean;
+    function digital_confere(digital1 : string; digital2 : string) : boolean;
+  end;
+
+implementation
+
+uses Comobj, uConstBioMatch, sysutils;
+
+{ TItiumSecugen }
+
+function TItiumSecugen.capturar(var digital, erro: string; var cancelado : boolean): boolean;
+begin
+  objSecuBsp.Capture;
+  if objSecuBSP.ErrorCode = SecuBSPERROR_NONE then
+  begin
+    digital := objSecuBsp.FIRTextData;
+    Result := True;
+    cancelado := False;
+  end
+  else
+  begin
+    Result := False;
+    erro := 'Erro na captura! [' + IntToStr(objSecuBsp.ErrorCode) + ']';
+    cancelado :=  erro = 'Erro na captura! [513]';
+  end;
+end;
+
+function TItiumSecugen.digital_confere(digital1, digital2: string): boolean;
+begin
+  objSecuBsp.VerifyMatch(digital1, digital2);
+  Result := objSecuBsp.IsMatched = SecuBSP_TRUE;
+end;
+
+function TItiumSecugen.inicializar_leitor(var erro: string): boolean;
+begin
+  objSecuBsp := CreateOleObject('SecuBSPCOM.APIInterface');
+  objSecuBSP.EnumerateDevice;
+  erro_code := objSecuBSP.OpenDevice(SecuBSP_DEVICE_ID_AUTO_DETECT);
+  if objSecuBSP.ErrorCode = SecuBSPERROR_NONE then
+  begin
+    Result := True;
+  end
+  else
+  begin
+    Result := False;
+    erro :=  'Erro ao ativar leitor! [' + inttostr(objSecuBSP.ErrorCode) + ']';
+  end;
+end;
+
+end.

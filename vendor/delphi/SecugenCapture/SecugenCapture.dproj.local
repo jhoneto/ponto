@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012/09/16 13:56:55.066.pas,C:\Users\Hamilton\Documents\RAD Studio\Projects\Unit1.pas=C:\itium\biomatch\SecugenCapture\FSecugenCapture.pas</Transaction>
+    <Transaction>2012/09/16 13:56:55.066.dfm,C:\Users\Hamilton\Documents\RAD Studio\Projects\Unit1.dfm=C:\itium\biomatch\SecugenCapture\FSecugenCapture.dfm</Transaction>
+    <Transaction>2012/09/16 13:57:06.668.dproj,C:\Users\Hamilton\Documents\RAD Studio\Projects\Project1.dproj=C:\itium\biomatch\SecugenCapture\SecugenCapture.dproj</Transaction>
+    <Transaction>2012/09/16 13:58:15.230.pas,C:\itium\biomatch\SecugenCapture\Unit1.pas=C:\itium\biomatch\Common\dmDados.pas</Transaction>
+    <Transaction>2012/09/16 13:58:15.230.dfm,C:\itium\biomatch\SecugenCapture\Unit1.dfm=C:\itium\biomatch\Common\dmDados.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,140 @@
+unit fSecugenEnroll;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, IniFiles, ZConnection, DB, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset, ActnList, Comobj, uConstBioMatch, dmDados;
+
+type
+  TfrmSecugenEnroll = class(TForm)
+    edtStatus: TEdit;
+    Panel1: TPanel;
+    edtMatricula: TEdit;
+    Label1: TLabel;
+    btnVerificar: TButton;
+    btnCapturar: TButton;
+    lblNome: TLabel;
+    lblMatricula: TLabel;
+    actPrincipal: TActionList;
+    actCapturar: TAction;
+    procedure FormCreate(Sender: TObject);
+    procedure btnVerificarClick(Sender: TObject);
+    procedure actCapturarUpdate(Sender: TObject);
+    procedure actCapturarExecute(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+  private
+    { Private declarations }
+    FDados : TdtmDados;
+    FMatricula : string;
+    procedure inicializar;
+    procedure capturar;
+    procedure validar_matricula;
+    procedure cadastrar_digital(digital : string);
+  public
+    { Public declarations }
+  end;
+
+var
+  frmSecugenEnroll: TfrmSecugenEnroll;
+
+implementation
+
+uses uSecugen;
+
+
+{$R *.dfm}
+
+procedure TfrmSecugenEnroll.actCapturarExecute(Sender: TObject);
+begin
+  capturar;
+end;
+
+procedure TfrmSecugenEnroll.actCapturarUpdate(Sender: TObject);
+begin
+  (Sender as TAction).Enabled := FMatricula <> '';
+end;
+
+procedure TfrmSecugenEnroll.btnVerificarClick(Sender: TObject);
+begin
+  validar_matricula;
+end;
+
+procedure TfrmSecugenEnroll.cadastrar_digital(digital: string);
+begin
+
+  edtStatus.Text := 'Digital salva com sucesso';
+end;
+
+procedure TfrmSecugenEnroll.capturar;
+var erro : string;
+    digital : string;
+begin
+  with TItiumSecugen.Create do
+  try
+    if inicializar_leitor(erro) then
+    begin
+      if capturar(digital, erro) then
+      begin
+        cadastrar_digital(digital);
+      end
+      else
+      begin
+        edtStatus.Text := erro;
+      end;
+    end
+    else
+    begin
+      edtStatus.Text := erro;
+    end;
+  finally
+    Free;
+  end;
+end;
+
+procedure TfrmSecugenEnroll.FormCreate(Sender: TObject);
+begin
+  FMatricula := '';
+  inicializar;
+end;
+
+procedure TfrmSecugenEnroll.FormDestroy(Sender: TObject);
+begin
+  FDados.Free;
+end;
+
+procedure TfrmSecugenEnroll.inicializar;
+begin
+  try
+    FDados := TdtmDados.Create(Self);
+    edtStatus.Text := 'Conexão realizada com sucesso!';
+  except
+    on E:Exception do
+      edtStatus.Text := 'Erro na conexão - ' + E.Message;
+  end;
+end;
+
+procedure TfrmSecugenEnroll.validar_matricula;
+begin
+  funcionario := FDados.carregar_funcionario(edtMatricula.Text);
+  if funcionario.NaoEncontrado then
+  begin
+    edtStatus.Text := 'Matrícula não encontrada';
+    edtStatus.Color := clRed;
+    FMatricula := '';
+    lblNome.Caption := 'Nome: ';
+    lblMatricula.Caption := 'Matrícula: ';
+
+  end
+  else
+  begin
+    FMatricula := edtStatus.Text;
+    lblNome.Caption := 'Nome: ' + funcionario.Nome;
+    lblMatricula.Caption := 'Matrícula: ' + funcionario.Matricula;
+    edtStatus.Text := 'Matrícula encontrada';
+    edtStatus.Color := clInfoBk;
+  end;
+end;
+
+end.

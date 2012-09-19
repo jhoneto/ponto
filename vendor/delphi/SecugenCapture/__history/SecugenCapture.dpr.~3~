@@ -1,0 +1,16 @@
+program SecugenCapture;
+
+uses
+  Forms,
+  FSecugenCapture in 'FSecugenCapture.pas' {frmSecugenCapture},
+  dmDados in '..\Common\dmDados.pas' {DataModule1: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmSecugenCapture, frmSecugenCapture);
+  Application.CreateForm(TDataModule1, DataModule1);
+  Application.Run;
+end.

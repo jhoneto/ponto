@@ -1,0 +1,49 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{5dd87522-5e6d-4759-93cb-d672f416cb10}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup />
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="SecugenEnroll">
+    <MSBuild Projects="SecugenEnroll\SecugenEnroll.dproj" Targets="" />
+  </Target>
+  <Target Name="SecugenEnroll:Clean">
+    <MSBuild Projects="SecugenEnroll\SecugenEnroll.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SecugenEnroll:Make">
+    <MSBuild Projects="SecugenEnroll\SecugenEnroll.dproj" Targets="Make" />
+  </Target>
+  <Target Name="SecugenCapture">
+    <MSBuild Projects="SecugenCapture\SecugenCapture.dproj" Targets="" />
+  </Target>
+  <Target Name="SecugenCapture:Clean">
+    <MSBuild Projects="SecugenCapture\SecugenCapture.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="SecugenCapture:Make">
+    <MSBuild Projects="SecugenCapture\SecugenCapture.dproj" Targets="Make" />
+  </Target>
+  <Target Name="BioMatchSync">
+    <MSBuild Projects="BioMatchSync\BioMatchSync.dproj" Targets="" />
+  </Target>
+  <Target Name="BioMatchSync:Clean">
+    <MSBuild Projects="BioMatchSync\BioMatchSync.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BioMatchSync:Make">
+    <MSBuild Projects="BioMatchSync\BioMatchSync.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="SecugenEnroll;SecugenCapture;BioMatchSync" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="SecugenEnroll:Clean;SecugenCapture:Clean;BioMatchSync:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="SecugenEnroll:Make;SecugenCapture:Make;BioMatchSync:Make" />
+  </Target>
+</Project>

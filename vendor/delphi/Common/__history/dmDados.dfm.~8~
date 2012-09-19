@@ -1,0 +1,93 @@
+object dtmDados: TdtmDados
+  OldCreateOrder = False
+  Height = 239
+  Width = 518
+  object cnnPrincipal: TZConnection
+    Protocol = 'postgresql'
+    Port = 5432
+    Left = 56
+    Top = 24
+  end
+  object qryFuncionario: TZQuery
+    Connection = cnnPrincipal
+    SQL.Strings = (
+      'select * from employees'
+      'where registry = :registry')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'registry'
+        ParamType = ptUnknown
+      end>
+    Left = 56
+    Top = 80
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'registry'
+        ParamType = ptUnknown
+      end>
+  end
+  object qryBatida: TZQuery
+    Connection = cnnPrincipal
+    SQL.Strings = (
+      'select * from points'
+      'where employee_id = :employee_id'
+      '  and cast( "date" as date) = cast(:data as date)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'employee_id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'data'
+        ParamType = ptUnknown
+      end>
+    Left = 184
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'employee_id'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'data'
+        ParamType = ptUnknown
+      end>
+  end
+  object qryHorario: TZQuery
+    SQL.Strings = (
+      'select o.*'
+      'from office_hours o'
+      'inner join employees e'
+      'on o.id = e.office_hour_id'
+      'where e.id = :funcionario_id')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'funcionario_id'
+        ParamType = ptUnknown
+      end>
+    Left = 256
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'funcionario_id'
+        ParamType = ptUnknown
+      end>
+  end
+  object qryFuncionarios: TZQuery
+    Connection = cnnPrincipal
+    SQL.Strings = (
+      'select * from employees'
+      'where status = 1')
+    Params = <>
+    Left = 80
+    Top = 136
+  end
+end

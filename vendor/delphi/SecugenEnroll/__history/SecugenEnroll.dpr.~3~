@@ -1,0 +1,15 @@
+program SecugenEnroll;
+
+uses
+  Forms,
+  fSecugenEnroll in 'fSecugenEnroll.pas' {frmSecugenEnroll},
+  uConstBioMatch in '..\Common\uConstBioMatch.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmSecugenEnroll, frmSecugenEnroll);
+  Application.Run;
+end.

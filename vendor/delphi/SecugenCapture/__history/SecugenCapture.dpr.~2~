@@ -1,0 +1,14 @@
+program SecugenCapture;
+
+uses
+  Forms,
+  FSecugenCapture in 'FSecugenCapture.pas' {frmSecugenCapture};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmSecugenCapture, frmSecugenCapture);
+  Application.Run;
+end.

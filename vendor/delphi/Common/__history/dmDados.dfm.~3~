@@ -1,0 +1,31 @@
+object dtmDados: TdtmDados
+  OldCreateOrder = False
+  Height = 239
+  Width = 518
+  object cnnPrincipal: TZConnection
+    Protocol = 'postgresql'
+    Port = 5432
+    Left = 56
+    Top = 24
+  end
+  object qryFuncionario: TZQuery
+    Connection = cnnPrincipal
+    SQL.Strings = (
+      'select * from employees'
+      'where registry = :registry')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'registry'
+        ParamType = ptUnknown
+      end>
+    Left = 56
+    Top = 80
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'registry'
+        ParamType = ptUnknown
+      end>
+  end
+end
