@@ -18,11 +18,12 @@ gem "cancan", "~> 1.6.8"
 gem "will_paginate", "~> 3.0.3"
 gem "will_paginate-bootstrap", "~> 0.2.1"
 gem 'bootstrap-sass', '~> 2.0.3'
-#gem "sqlite3-ruby" 
+#gem "sqlite3-ruby"
+gem "therubyracer", "~> 0.10.2"
 
 group :development, :test do
   gem 'rspec-rails'
-  gem "webrat", "~> 0.7.3" 
+  gem "webrat", "~> 0.7.3"
 end
 
 
@@ -57,4 +58,3 @@ group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
-

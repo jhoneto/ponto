@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730172517) do
+ActiveRecord::Schema.define(:version => 20120920142528) do
 
   create_table "departments", :force => true do |t|
     t.string   "name"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(:version => 20120730172517) do
     t.string   "address",              :limit => 100
     t.string   "address_number",       :limit => 10
     t.string   "address_complement",   :limit => 30
-    t.string   "address_zip_code",     :limit => 9
     t.string   "address_neighborhood", :limit => 60
     t.string   "address_city",         :limit => 60
     t.string   "adress_state",         :limit => 2
@@ -55,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20120730172517) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "fingerprint"
+    t.string   "address_zip_code"
   end
 
   create_table "enterprises", :force => true do |t|
