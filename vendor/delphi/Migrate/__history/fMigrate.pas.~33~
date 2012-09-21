@@ -1,0 +1,254 @@
+unit fMigrate;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ZConnection, ExtCtrls, DB, ZAbstractRODataset,
+  ZAbstractDataset, ZDataset;
+
+type
+  TfrmMigrate = class(TForm)
+    GroupBox1: TGroupBox;
+    GroupBox2: TGroupBox;
+    Label1: TLabel;
+    edtServerMySQL: TEdit;
+    Label2: TLabel;
+    edtPortMySQL: TEdit;
+    Label3: TLabel;
+    edtBDMySQL: TEdit;
+    Label4: TLabel;
+    edtUserMySQL: TEdit;
+    Label5: TLabel;
+    edtPasswordMySQL: TEdit;
+    Button1: TButton;
+    cnnMySQL: TZConnection;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    edtServerPostgres: TEdit;
+    edtPortPostgres: TEdit;
+    edtBDPostgres: TEdit;
+    edtUserPostgres: TEdit;
+    edtPasswordPostgres: TEdit;
+    Button2: TButton;
+    cnnPostgres: TZConnection;
+    mmoLog: TMemo;
+    Panel1: TPanel;
+    Button3: TButton;
+    qryMySQL: TZQuery;
+    qryPostgres: TZQuery;
+    qryEnterprises: TZQuery;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+    procedure migrar_orgaos;
+    procedure migrar_setor;
+    procedure migrar_cargo;
+    procedure migrar_escala;
+    procedure migrar_funcionario;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmMigrate: TfrmMigrate;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmMigrate.Button1Click(Sender: TObject);
+begin
+  with cnnMySQL do
+  begin
+    Disconnect;
+    HostName := edtServerMySQL.Text;
+    Database := edtBDMySQL.Text;
+    Port := StrToInt(edtPortMySQL.Text);
+    User := edtUserMySQL.Text;
+    Password := edtPasswordMySQL.Text;
+    Connect;
+    Application.MessageBox('Conexão realizada com sucesso!', '');
+  end;
+end;
+
+procedure TfrmMigrate.Button2Click(Sender: TObject);
+begin
+  with cnnPostgres do
+  begin
+    Disconnect;
+    HostName := edtServerPostgres.Text;
+    Database := edtBDPostgres.Text;
+    Port := StrToInt(edtPortPostgres.Text);
+    User := edtUserPostgres.Text;
+    Password := edtPasswordPostgres.Text;
+    Connect;
+    Application.MessageBox('Conexão realizada com sucesso!', '');
+  end;
+end;
+
+procedure TfrmMigrate.Button3Click(Sender: TObject);
+begin
+//
+  //migrar_orgaos;
+  //migrar_setor;
+  //migrar_cargo;
+  migrar_escala;
+end;
+
+procedure TfrmMigrate.migrar_cargo;
+begin
+  with qryMySQL do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select * from cargo';
+    Open;
+    while not Eof do
+    begin
+      qryPostgres.Close;
+      qryPostgres.SQL.Clear;
+      qryPostgres.SQL.Text := 'insert into roles (id, description) values (:id, :description)';
+      qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('codigo').AsInteger;
+      qryPostgres.Params.ParamByName('description').AsString := FieldByName('descricao').AsString;
+      qryPostgres.ExecSQL;
+      Next;
+    end;
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select max(codigo) as m from cargo';
+    Open;
+    qryPostgres.Close;
+    qryPostgres.SQL.Clear;
+    qryPostgres.SQL.Text := 'ALTER SEQUENCE roles_id_seq RESTART WITH :max;';
+    qryPostgres.Params.ParamByName('max').AsInteger := FieldByName('m').AsInteger;
+    qryPostgres.ExecSQL;
+  end;
+end;
+
+procedure TfrmMigrate.migrar_escala;
+var id : integer;
+    i : integer;
+begin
+  with qryMySQL do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select * from escala order by ID_ESCALA';
+    Open;
+    while not Eof do
+    begin
+      qryEnterprises.close;
+      qryEnterprises.Open;
+      while not qryEnterprises.Eof do
+      begin
+        id := qryEnterprises.FieldByName('id').AsInteger*100 + FieldByName('ID_ESCALA').AsInteger;
+        qryPostgres.Close;
+        qryPostgres.SQL.Clear;
+        qryPostgres.SQL.Text := 'insert into office_hours (id, name, is_free, input_tolerance, output_tolerance, enterprise_id) values (:id, :name, false, 15, 15, :enterprise_id)';
+        qryPostgres.Params.ParamByName('id').AsInteger := id;
+        qryPostgres.Params.ParamByName('name').AsString := FieldByName('ENTRADA_MANHA').AsString + '|'+FieldByName('SAIDA_MANHA').AsString + '|'+FieldByName('ENTRADA_TARDE').AsString + '|'+FieldByName('SAIDA_TARDE').AsString;
+        qryPostgres.Params.ParamByName('enterprise_id').AsInteger := qryEnterprises.FieldByName('id').AsInteger;
+        qryPostgres.ExecSQL;
+        for i := 1 to 5 do
+        begin
+          qryPostgres.Close;
+          qryPostgres.SQL.Clear;
+          qryPostgres.SQL.Text := 'insert into office_hour_items (day, entry_1, exit_1, entry_2, exit_2, office_hour_id) values (day, entry_1, exit_1, entry_2, exit_2, office_hour_id)';
+          qryPostgres.Params.ParamByName('day').AsInteger := i;
+          qryPostgres.Params.ParamByName('entry_1').AsTime := FieldByName('ENTRADA_MANHA').AsDateTime;
+          qryPostgres.Params.ParamByName('exit_1').AsTime := FieldByName('SAIDA_MANHA').AsDateTime;
+          qryPostgres.Params.ParamByName('entry_2').AsTime := FieldByName('ENTRADA_TARDE').AsDateTime;
+          qryPostgres.Params.ParamByName('exit_2').AsTime := FieldByName('SAIDA_TARDE').AsDateTime;
+          qryPostgres.Params.ParamByName('office_hour_id').AsInteger := id;
+          qryPostgres.ExecSQL;
+        end;
+          
+
+        qryEnterprises.Next;
+      end;
+      Next;
+    end;
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select max(codigo*100) as m from orgao';
+    Open;
+    qryPostgres.Close;
+    qryPostgres.SQL.Clear;
+    qryPostgres.SQL.Text := 'ALTER SEQUENCE enterprises_id_seq RESTART WITH :max;';
+    qryPostgres.Params.ParamByName('max').AsInteger := FieldByName('m').AsInteger;
+    qryPostgres.ExecSQL;
+  end;
+end;
+
+procedure TfrmMigrate.migrar_funcionario;
+begin
+
+end;
+
+procedure TfrmMigrate.migrar_orgaos;
+begin
+  with qryMySQL do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select * from orgao';
+    Open;
+    while not Eof do
+    begin
+      qryPostgres.Close;
+      qryPostgres.SQL.Clear;
+      qryPostgres.SQL.Text := 'insert into enterprises (id, name) values (:id, :name)';
+      qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('codigo').AsInteger;
+      qryPostgres.Params.ParamByName('name').AsString := FieldByName('descricao').AsString;
+      qryPostgres.ExecSQL;
+      Next;
+    end;
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select max(codigo) as m from orgao';
+    Open;
+    qryPostgres.Close;
+    qryPostgres.SQL.Clear;
+    qryPostgres.SQL.Text := 'ALTER SEQUENCE enterprises_id_seq RESTART WITH :max;';
+    qryPostgres.Params.ParamByName('max').AsInteger := FieldByName('m').AsInteger;
+    qryPostgres.ExecSQL;
+  end;
+end;
+
+procedure TfrmMigrate.migrar_setor;
+begin
+  with qryMySQL do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select * from setor';
+    Open;
+    while not Eof do
+    begin
+      qryPostgres.Close;
+      qryPostgres.SQL.Clear;
+      qryPostgres.SQL.Text := 'insert into departments (id, name) values (:id, :name)';
+      qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('codigo').AsInteger;
+      qryPostgres.Params.ParamByName('name').AsString := FieldByName('descricao').AsString;
+      qryPostgres.ExecSQL;
+      Next;
+    end;
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select max(codigo) as m from setor';
+    Open;
+    qryPostgres.Close;
+    qryPostgres.SQL.Clear;
+    qryPostgres.SQL.Text := 'ALTER SEQUENCE departments_id_seq RESTART WITH :max;';
+    qryPostgres.Params.ParamByName('max').AsInteger := FieldByName('m').AsInteger;
+    qryPostgres.ExecSQL;
+  end;
+end;
+
+end.

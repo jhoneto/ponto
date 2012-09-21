@@ -37,13 +37,22 @@
   <Target Name="BioMatchSync:Make">
     <MSBuild Projects="BioMatchSync\BioMatchSync.dproj" Targets="Make" />
   </Target>
+  <Target Name="BioMatchMigrate">
+    <MSBuild Projects="Migrate\BioMatchMigrate.dproj" Targets="" />
+  </Target>
+  <Target Name="BioMatchMigrate:Clean">
+    <MSBuild Projects="Migrate\BioMatchMigrate.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="BioMatchMigrate:Make">
+    <MSBuild Projects="Migrate\BioMatchMigrate.dproj" Targets="Make" />
+  </Target>
   <Target Name="Build">
-    <CallTarget Targets="SecugenEnroll;SecugenCapture;BioMatchSync" />
+    <CallTarget Targets="SecugenEnroll;SecugenCapture;BioMatchSync;BioMatchMigrate" />
   </Target>
   <Target Name="Clean">
-    <CallTarget Targets="SecugenEnroll:Clean;SecugenCapture:Clean;BioMatchSync:Clean" />
+    <CallTarget Targets="SecugenEnroll:Clean;SecugenCapture:Clean;BioMatchSync:Clean;BioMatchMigrate:Clean" />
   </Target>
   <Target Name="Make">
-    <CallTarget Targets="SecugenEnroll:Make;SecugenCapture:Make;BioMatchSync:Make" />
+    <CallTarget Targets="SecugenEnroll:Make;SecugenCapture:Make;BioMatchSync:Make;BioMatchMigrate:Make" />
   </Target>
 </Project>
