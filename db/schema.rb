@@ -11,17 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20120920142528) do
-=======
-ActiveRecord::Schema.define(:version => 20120920002255) do
 
   create_table "databases", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> Inclusão do campo exported na tabela points
 
   create_table "departments", :force => true do |t|
     t.string   "name"

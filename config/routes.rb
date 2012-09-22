@@ -34,6 +34,10 @@ Ponto::Application.routes.draw do
       post 'save_fingerprint'
     end
   end
+  
+  resource :session, controller: 'sessions'
+  
+  match 'sign_in' => 'sessions#new', :as => 'sign_in'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
