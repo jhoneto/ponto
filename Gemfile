@@ -20,6 +20,8 @@ gem "will_paginate-bootstrap", "~> 0.2.1"
 gem 'bootstrap-sass', '~> 2.0.3'
 #gem "sqlite3-ruby"
 gem "therubyracer", "~> 0.10.2"
+gem 'ar-octopus', :require => 'octopus', :git => "git://github.com/tchandy/octopus.git"
+
 
 group :development, :test do
   gem 'rspec-rails'
