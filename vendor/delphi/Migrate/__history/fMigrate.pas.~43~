@@ -95,9 +95,13 @@ end;
 procedure TfrmMigrate.Button3Click(Sender: TObject);
 begin
 //
-  //migrar_orgaos;
-  //migrar_setor;
-  //migrar_cargo;
+  mmoLog.Lines.Add('Migração iniciada. Aguarde....');
+  migrar_orgaos;
+  migrar_setor;
+  migrar_cargo;
+  migrar_escala;
+  migrar_funcionario;
+  mmoLog.Lines.Add('Migração conluída');
 end;
 
 procedure TfrmMigrate.migrar_cargo;
@@ -158,12 +162,12 @@ begin
         begin
           qryPostgres.Close;
           qryPostgres.SQL.Clear;
-          qryPostgres.SQL.Text := 'insert into office_hour_items (day, entry_1, exit_1, entry_2, exit_2, office_hour_id) values (day, entry_1, exit_1, entry_2, exit_2, office_hour_id)';
+          qryPostgres.SQL.Text := 'insert into office_hour_items (day, entry_1, exit_1, entry_2, exit_2, office_hour_id) values (:day, :entry_1, :exit_1, :entry_2, :exit_2, :office_hour_id)';
           qryPostgres.Params.ParamByName('day').AsInteger := i;
           qryPostgres.Params.ParamByName('entry_1').AsTime := FieldByName('ENTRADA_MANHA').AsDateTime;
-          qryPostgres.Params.ParamByName('exit_1').AsInteger := FieldByName('SAIDA_MANHA').AsDateTime;
-          qryPostgres.Params.ParamByName('entry_2').AsInteger := FieldByName('ENTRADA_TARDE').AsDateTime;
-          qryPostgres.Params.ParamByName('exit_2').AsInteger := FieldByName('SAIDA_TARDE').AsDateTime;
+          qryPostgres.Params.ParamByName('exit_1').AsTime := FieldByName('SAIDA_MANHA').AsDateTime;
+          qryPostgres.Params.ParamByName('entry_2').AsTime := FieldByName('ENTRADA_TARDE').AsDateTime;
+          qryPostgres.Params.ParamByName('exit_2').AsTime := FieldByName('SAIDA_TARDE').AsDateTime;
           qryPostgres.Params.ParamByName('office_hour_id').AsInteger := id;
           qryPostgres.ExecSQL;
         end;
@@ -187,7 +191,37 @@ end;
 
 procedure TfrmMigrate.migrar_funcionario;
 begin
-
+  with qryMySQL do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select * from funcionario';
+    Open;
+    while not Eof do
+    begin
+      qryPostgres.Close;
+      qryPostgres.SQL.Clear;
+      qryPostgres.SQL.Text := 'insert into employees (id, name, registry, enterprise_id, office_hour_id, role_id, department_id, status) values (:id, :name, :registry, :enterprise_id, :office_hour_id, :role_id, :department_id, 1)';
+      qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('id_funcionario').AsInteger;
+      qryPostgres.Params.ParamByName('name').AsString := UTF8Encode(FieldByName('nomecompleto').AsString);
+      qryPostgres.Params.ParamByName('registry').AsString := UTF8Encode(FieldByName('login').AsString);
+      qryPostgres.Params.ParamByName('enterprise_id').AsInteger := FieldByName('orgao').AsInteger;
+      qryPostgres.Params.ParamByName('office_hour_id').AsInteger := FieldByName('escala').AsInteger;
+      qryPostgres.Params.ParamByName('role_id').AsInteger := FieldByName('cargo').AsInteger;
+      qryPostgres.Params.ParamByName('department_id').AsInteger := FieldByName('setor').AsInteger;
+      qryPostgres.ExecSQL;
+      Next;
+    end;
+    Close;
+    SQL.Clear;
+    SQL.Text := 'select max(id_funcionario) as m from funcionario';
+    Open;
+    qryPostgres.Close;
+    qryPostgres.SQL.Clear;
+    qryPostgres.SQL.Text := 'ALTER SEQUENCE employees_id_seq RESTART WITH :max;';
+    qryPostgres.Params.ParamByName('max').AsInteger := FieldByName('m').AsInteger;
+    qryPostgres.ExecSQL;
+  end;
 end;
 
 procedure TfrmMigrate.migrar_orgaos;
@@ -204,7 +238,7 @@ begin
       qryPostgres.SQL.Clear;
       qryPostgres.SQL.Text := 'insert into enterprises (id, name) values (:id, :name)';
       qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('codigo').AsInteger;
-      qryPostgres.Params.ParamByName('name').AsString := FieldByName('descricao').AsString;
+      qryPostgres.Params.ParamByName('name').AsString := UTF8Encode(FieldByName('descricao').AsString);
       qryPostgres.ExecSQL;
       Next;
     end;
