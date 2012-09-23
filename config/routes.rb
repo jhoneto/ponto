@@ -10,6 +10,9 @@ Ponto::Application.routes.draw do
       get "get_office_hours"
       get "get_departments"
     end
+    member do
+      get "replicate"
+    end
   end
 
   resources :enterprises

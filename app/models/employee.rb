@@ -49,18 +49,23 @@ class Employee < ActiveRecord::Base
       if employee_slave.nil?
         puts "Nao encontrado"
 
-        employee_slave = Employee.using(database.name.to_sym).create(:name => employee.name, 
-                                                            :registry => employee.registry, 
-                                                            :fingerprint => employee.fingerprint,
-                                                            :enterprise_id => employee.enterprise_id,
-                                                            :office_hour_id => employee.office_hour_id)
+        employee_slave = Employee.using(database.name.to_sym).create(:name => employee.name,
+        :registry => employee.registry,
+        :fingerprint => employee.fingerprint,
+        :enterprise_id => employee.enterprise_id,
+        :office_hour_id => employee.office_hour_id)
 
       else
         puts employee_slave.name
-        employee_slave.name = employee.name
-        employee_slave.fingerprint = employee.fingerprint
-        employee_slave.registry = employee.registry
-        employee_slave.save
+        #employee_slave.name = employee.name
+        #employee_slave.fingerprint = employee.fingerprint
+        #employee_slave.registry = employee.registry
+        #employee_slave.save
+        employee_slave.update_attributes(:name => employee.name,
+        :registry => employee.registry,
+        :fingerprint => employee.fingerprint,
+        :enterprise_id => employee.enterprise_id,
+        :office_hour_id => employee.office_hour_id)
         puts "Encontrado"
       end
 

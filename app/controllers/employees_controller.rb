@@ -35,4 +35,9 @@ class EmployeesController < InheritedResources::Base
     end
     render :json => @office_hours.to_json(:only => [:id, :name])
   end
+  
+  def replicate
+    Employee.migrate_employee(params[:id])
+    redirect_to(employees_path, :notice => "Colaborador replicado com sucesso") 
+  end
 end

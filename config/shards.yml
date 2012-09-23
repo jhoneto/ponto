@@ -11,7 +11,7 @@ octopus:
         pool: 5
         username: postgres
         password: Maker@1
-        host: 192.168.1.2
+        host: 192.168.1.10
         port: 5432
   production:
     shards:
@@ -22,7 +22,7 @@ octopus:
         pool: 5
         username: postgres
         password: Maker@1
-        host: 192.168.1.2
+        host: 192.168.1.10
         port: 5432
 
   
