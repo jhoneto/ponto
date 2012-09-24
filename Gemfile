@@ -20,6 +20,7 @@ gem "will_paginate-bootstrap", "~> 0.2.1"
 gem 'bootstrap-sass', '~> 2.0.3'
 #gem "sqlite3-ruby"
 gem "therubyracer", "~> 0.10.2"
+gem "thin", "~> 1.5.0"
 
 group :development, :test do
   gem 'rspec-rails'
