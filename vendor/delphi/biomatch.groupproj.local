@@ -4,6 +4,6 @@
     <Transaction>2012/09/16 13:56:01.295.groupproj,C:\Users\Hamilton\Documents\RAD Studio\Projects\ProjectGroup1.groupproj=C:\itium\biomatch\biomatch.groupproj</Transaction>
   </Transactions>
 	<Default.Personality>
-		<Projects ActiveProject="BioMatchSync.exe"/>
+		<Projects ActiveProject="BioMatchMigrate.exe"/>
 	</Default.Personality>
 </BorlandProject>
