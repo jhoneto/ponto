@@ -24,12 +24,9 @@ class Employee < ActiveRecord::Base
   validates_uniqueness_of :registry
 
   after_initialize :init
- 
   def init
     self.status  ||= 1
   end
-  
-  
 
   def self.save_fingerprint(registry, fingerprint)
     employee = Employee.find_by_registry(registry)
@@ -39,6 +36,39 @@ class Employee < ActiveRecord::Base
     employee.fingerprint = fingerprint
     employee.save
     1
+    end
+  end
+
+  def self.migrate_employee(employee_id)
+    employee = Employee.find(employee_id)
+    puts employee.name
+    databases = Database.all
+    databases.each do |database|
+      puts database.name.to_sym
+      employee_slave = Employee.using(database.name.to_sym).where(:registry => employee.registry).first
+      if employee_slave.nil?
+        puts "Nao encontrado"
+
+        employee_slave = Employee.using(database.name.to_sym).create(:name => employee.name,
+        :registry => employee.registry,
+        :fingerprint => employee.fingerprint,
+        :enterprise_id => employee.enterprise_id,
+        :office_hour_id => employee.office_hour_id)
+
+      else
+        puts employee_slave.name
+        #employee_slave.name = employee.name
+        #employee_slave.fingerprint = employee.fingerprint
+        #employee_slave.registry = employee.registry
+        #employee_slave.save
+        employee_slave.update_attributes(:name => employee.name,
+        :registry => employee.registry,
+        :fingerprint => employee.fingerprint,
+        :enterprise_id => employee.enterprise_id,
+        :office_hour_id => employee.office_hour_id)
+        puts "Encontrado"
+      end
+
     end
   end
 end

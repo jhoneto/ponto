@@ -1,6 +1,46 @@
-<div class="span4 offset4" style="padding-top: 200px">
-<h2>Sistema de ponto</h2>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Documento sem título</title>
+		<style type="text/css">
+			body, td, th {
+				color: #09F;
+			}
+			body {
+				background-image: url(images/bg_repeat.png);
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
 
-<%= render :partial => '/sessions/form' %>
-<%= link_to "Recuperar senha?", new_password_path %>
-</div>
+	<body>
+
+		<div style="background-image:url(images/bg.png); width:1010px; height:660px; background-repeat:no-repeat; margin:-330px 0 0 -505px;; position: absolute; top: 50%; left: 50%  ">
+
+			<div >
+				<a style="width:80px; height:22px; background-image:url(images/logo.png); margin:23px 0 0 20px; position:absolute" href="#"><img src="images/logo.png" width="80" height="22" /></a>
+			</div>
+			<%= form_for :session, :url => session_path do |form| %>
+			<div style="width:246px; height:86px; margin:338px 0 0 690px; position:absolute">
+
+				<div style="width:246px; height:25px; float:left">
+					<label style="font-size:12px; font-family:Verdana, Geneva, sans-serif;line-height:25px; padding-left:5px; color:#225F6F;">Login</label>
+					<input id="session_username" style="float:right; background-color:#333; border-color:#225F6F; color:#225F6F; padding:2px; border-style:solid; height:18px;" name="session[username]" type="text" value="login" size="20" maxlength="50" />
+				</div>
+				<div style="width:246px; height:25px; float:left; margin-top:11px;">
+					<label style="font-size:12px; font-family:Verdana, Geneva, sans-serif;line-height:25px; padding-left:5px; color:#225F6F;">Senha</label>
+					<input id="session_password" style="float:right; background-color:#333; border-color:#225F6F; border-style:solid; color:#225F6F; padding:2px; height:18px;" name="session[password]" type="password" value="senha" size="20" maxlength="50" />
+				</div>
+				<div style="width:246px; height:36px; float:left">
+					<input style="float:right; margin-top:5px; background-color:#225F6F; border:none; color:#333; font-size:12px; font-family:Verdana, Geneva, sans-serif;" name="Entrar" type="submit" value="Entrar" />
+				</div>
+
+			</div>
+			<% end %>
+		</div>
+
+	</body>
+</html>
+

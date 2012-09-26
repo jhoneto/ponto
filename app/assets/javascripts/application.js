@@ -4,16 +4,16 @@
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
 // the compiled file.
 //
-//= require bootstrap
+
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require jquery_nested_form
 //= require jquery.maskedinput
-
+//= require bootstrap
 
 $(function() {
-	
+
 	$(".time").mask("99:99");
 
 	$(".datepicker").datepicker({
@@ -27,7 +27,7 @@ $(function() {
 		prevText: 'Anterior'
 	});
 
-	
+
 
 	$('a[data-code]').click(function(e) {
 		e.preventDefault();

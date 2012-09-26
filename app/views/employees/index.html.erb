@@ -13,6 +13,7 @@
     <th></th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
 <% @employees.each do |employee| %>
@@ -22,6 +23,7 @@
     <td><%= link_to raw("<i class='icon-folder-open'></i>"), employee, :class => "btn btn-mini", :title => "Mostar" %></td>
     <td><%= link_to raw("<i class='icon-pencil'></i>"), edit_employee_path(employee), :class => "btn btn-mini", :title => "Editar" %></td>
     <td><%= link_to raw("<i class='icon-remove-sign'></i>"), employee, confirm: 'Tem certeza?', method: :delete, :class => "btn btn-mini", :title => "Excluir" %></td>
+    <td><%= link_to raw("<i class='icon-repeat'></i>"), replicate_employee_path(employee),  :class => "btn btn-mini", :title => "Replicar" %></td>
   </tr>
 <% end %>
 </table>
