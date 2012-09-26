@@ -96,10 +96,10 @@ procedure TfrmMigrate.Button3Click(Sender: TObject);
 begin
 //
   mmoLog.Lines.Add('Migração iniciada. Aguarde....');
-  //migrar_orgaos;
-  //migrar_setor;
-  //migrar_cargo;
-  //migrar_escala;
+  migrar_orgaos;
+  migrar_setor;
+  migrar_cargo;
+  migrar_escala;
   migrar_funcionario;
   mmoLog.Lines.Add('Migração conluída');
 end;
@@ -118,7 +118,7 @@ begin
       qryPostgres.SQL.Clear;
       qryPostgres.SQL.Text := 'insert into roles (id, description) values (:id, :description)';
       qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('codigo').AsInteger;
-      qryPostgres.Params.ParamByName('description').AsString := UTF8Encode(FieldByName('descricao').AsString);
+      qryPostgres.Params.ParamByName('description').AsString := FieldByName('descricao').AsString;
       qryPostgres.ExecSQL;
       Next;
     end;
@@ -171,7 +171,7 @@ begin
           qryPostgres.Params.ParamByName('office_hour_id').AsInteger := id;
           qryPostgres.ExecSQL;
         end;
-
+          
 
         qryEnterprises.Next;
       end;
@@ -203,8 +203,8 @@ begin
       qryPostgres.SQL.Clear;
       qryPostgres.SQL.Text := 'insert into employees (id, name, registry, enterprise_id, office_hour_id, role_id, department_id, status) values (:id, :name, :registry, :enterprise_id, :office_hour_id, :role_id, :department_id, 1)';
       qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('id_funcionario').AsInteger;
-      qryPostgres.Params.ParamByName('name').AsString := UTF8Encode(FieldByName('nomecompleto').AsString);
-      qryPostgres.Params.ParamByName('registry').AsString := UTF8Encode(FieldByName('login').AsString);
+      qryPostgres.Params.ParamByName('name').AsString := FieldByName('nomecompleto').AsString;
+      qryPostgres.Params.ParamByName('registry').AsString := FieldByName('login').AsString;
       qryPostgres.Params.ParamByName('enterprise_id').AsInteger := FieldByName('orgao').AsInteger;
       qryPostgres.Params.ParamByName('office_hour_id').AsInteger := FieldByName('escala').AsInteger;
       qryPostgres.Params.ParamByName('role_id').AsInteger := FieldByName('cargo').AsInteger;
@@ -238,7 +238,7 @@ begin
       qryPostgres.SQL.Clear;
       qryPostgres.SQL.Text := 'insert into enterprises (id, name) values (:id, :name)';
       qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('codigo').AsInteger;
-      qryPostgres.Params.ParamByName('name').AsString := UTF8Encode(FieldByName('descricao').AsString);
+      qryPostgres.Params.ParamByName('name').AsString := FieldByName('descricao').AsString;
       qryPostgres.ExecSQL;
       Next;
     end;
@@ -268,7 +268,7 @@ begin
       qryPostgres.SQL.Clear;
       qryPostgres.SQL.Text := 'insert into departments (id, name) values (:id, :name)';
       qryPostgres.Params.ParamByName('id').AsInteger := FieldByName('codigo').AsInteger;
-      qryPostgres.Params.ParamByName('name').AsString := UTF8Encode(FieldByName('descricao').AsString);
+      qryPostgres.Params.ParamByName('name').AsString := FieldByName('descricao').AsString;
       qryPostgres.ExecSQL;
       Next;
     end;

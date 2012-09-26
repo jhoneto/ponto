@@ -206,6 +206,10 @@ object frmMigrate: TfrmMigrate
     Height = 115
     Align = alClient
     TabOrder = 2
+    ExplicitLeft = 200
+    ExplicitTop = 280
+    ExplicitWidth = 185
+    ExplicitHeight = 89
   end
   object Panel1: TPanel
     Left = 0
@@ -215,6 +219,9 @@ object frmMigrate: TfrmMigrate
     Align = alTop
     BevelOuter = bvNone
     TabOrder = 3
+    ExplicitLeft = 184
+    ExplicitTop = 224
+    ExplicitWidth = 185
     object Button3: TButton
       Left = 16
       Top = 10
