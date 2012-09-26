@@ -14,3 +14,7 @@
 /log/*.log
 /tmp
 config/database.yml
+/vendor/delphi/Migrate/__history
+/vendor/delphi/BioMatchSync/__history
+/vendor/delphi/SecugenCapture/__history
+/vendor/delphi/SecugenEnroll/__history
