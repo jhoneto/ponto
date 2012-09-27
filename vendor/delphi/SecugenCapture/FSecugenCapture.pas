@@ -42,13 +42,20 @@ end;
 procedure TfrmSecugenCapture.capturar(var cancelado : boolean);
 var digital : string;
     erro : string;
+    retorno : string;
 begin
   if FSecugen.capturar(digital, erro, cancelado) then
   begin
-    if FDados.registrar_ponto(digital, erro) then
-      edtStatus.Text := 'Ponto registro'
+    if FDados.registrar_ponto(digital, retorno, erro) then
+    begin
+      edtStatus.Text := retorno;
+      edtStatus.Color := clGreen;
+    end
     else
+    begin
       edtStatus.Text := erro;
+      edtStatus.Color := clRed;
+    end;
   end
   else
   begin
