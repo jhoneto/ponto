@@ -29,7 +29,7 @@
 		$("#employee_phone").mask("(99) 9999-9999");
 		$("#employee_cel_phone").mask("(99) 9999-9999");
 		$("#employee_address_zip_code").mask("99.999-999");
-	}); 
+	});
 </script>
 
 <%= simple_form_for(@employee) do |f| %>
@@ -167,14 +167,15 @@
 				</div>
 			</div>
 		</div>
-        <div class="tab-pane" id="tab4">
-			<% if @employee.new_record? %>
-			<applet code="br/gov/ce/ipmfor/sgp/FormMain.class" archive="/sgp-digitalpersona-applet-enrollment-new.jar" width="400" height="450">Seu browser não suporta applets
-	        </applet>
-	        <% else %>
-	        <applet code="br/gov/ce/ipmfor/sgp/FormMain.class" archive="/sgp-digitalpersona-applet-enrollment-edit.jar" width="400" height="450">	Seu browser não suporta applets
-	        </applet>
-	        <% end %>
+      <div class="tab-pane" id="tab4">
+        <!-- <% if @employee.new_record? %>
+          <applet code="br/gov/ce/ipmfor/sgp/FormMain.class" archive="/sgp-digitalpersona-applet-enrollment-new.jar" width="400" height="450">Seu browser não suporta applets
+          </applet>
+          <% else %>
+          <applet code="br/gov/ce/ipmfor/sgp/FormMain.class" archive="/sgp-digitalpersona-applet-enrollment-edit.jar" width="400" height="450">	Seu browser não suporta applets
+          </applet>
+        -->
+      <% end %>
 		</div>
 	</div>
 </div>
