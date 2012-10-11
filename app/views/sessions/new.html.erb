@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Documento sem título</title>
+		<title>BioMatch</title>
+		<%= javascript_include_tag "application" %>
 		<style type="text/css">
 			body, td, th {
 				color: #09F;
@@ -17,6 +18,12 @@
 
 	<body>
 
+<script>
+  $(function(){
+    $('#session_username').focus();
+  });
+</script>
+
 		<div style="background-image:url(images/bg.png); width:1010px; height:660px; background-repeat:no-repeat; margin:-330px 0 0 -505px;; position: absolute; top: 50%; left: 50%  ">
 
 			<div >
@@ -27,11 +34,11 @@
 
 				<div style="width:246px; height:25px; float:left">
 					<label style="font-size:12px; font-family:Verdana, Geneva, sans-serif;line-height:25px; padding-left:5px; color:#225F6F;">Login</label>
-					<input id="session_username" style="float:right; background-color:#333; border-color:#225F6F; color:#225F6F; padding:2px; border-style:solid; height:18px;" name="session[username]" type="text" value="login" size="20" maxlength="50" />
+					<input id="session_username" style="float:right; background-color:#333; border-color:#225F6F; color:#225F6F; padding:2px; border-style:solid; height:18px;" name="session[username]" size="20" maxlength="50" />
 				</div>
 				<div style="width:246px; height:25px; float:left; margin-top:11px;">
 					<label style="font-size:12px; font-family:Verdana, Geneva, sans-serif;line-height:25px; padding-left:5px; color:#225F6F;">Senha</label>
-					<input id="session_password" style="float:right; background-color:#333; border-color:#225F6F; border-style:solid; color:#225F6F; padding:2px; height:18px;" name="session[password]" type="password" value="senha" size="20" maxlength="50" />
+					<input id="session_password" style="float:right; background-color:#333; border-color:#225F6F; border-style:solid; color:#225F6F; padding:2px; height:18px;" name="session[password]" type="password" size="20" maxlength="50" />
 				</div>
 				<div style="width:246px; height:36px; float:left">
 					<input style="float:right; margin-top:5px; background-color:#225F6F; border:none; color:#333; font-size:12px; font-family:Verdana, Geneva, sans-serif;" name="Entrar" type="submit" value="Entrar" />
@@ -43,4 +50,3 @@
 
 	</body>
 </html>
-

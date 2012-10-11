@@ -34,7 +34,7 @@ type
     { Public declarations }
     constructor Create(AOwner : TComponent); override;
     function carregar_funcionario(matricula : string) : TFuncionario;
-    function registrar_ponto(digital : string; var erro : string) : boolean;
+    function registrar_ponto(digital : string; var retorno : string; var erro : string) : boolean;
     procedure salvar_funcionario(funcionario : TFuncionario);
     procedure exportar_batidas(_log : TMemo);
   end;
@@ -132,7 +132,7 @@ begin
   end;
 end;
 
-function TdtmDados.registrar_ponto(digital: string;
+function TdtmDados.registrar_ponto(digital: string; var retorno : string;
   var erro: string): boolean;
 var funcionario_id : integer;
     secugen : TItiumSecugen;
@@ -167,6 +167,8 @@ begin
     else
     begin
       Result := validar_horario(funcionario_id, erro);
+      if Result then
+        retorno := 'Ponto registrado -> ' + qryFuncionarios.FieldByName('name').AsString;
     end;
   end;
 end;
@@ -184,19 +186,22 @@ end;
 
 function TdtmDados.validar_horario(funcionario_id: integer; var erro : string): boolean;
 var tolerancia : integer;
+    ub : TDateTime;
   function ultima_batida : TDateTime;
   begin
-    Result := Now;
+    Result := Date;
+    if not qryBatida.FieldByName('entry_1').IsNull then
+      Result := Result + qryBatida.FieldByName('entry_1').AsDateTime;
     if not qryBatida.FieldByName('exit_1').IsNull then
-      Result := qryBatida.FieldByName('exit_1').AsDateTime;
+      Result := Result + qryBatida.FieldByName('exit_1').AsDateTime;
     if not qryBatida.FieldByName('entry_2').IsNull then
-      Result := qryBatida.FieldByName('entry_2').AsDateTime;
+      Result := Result + qryBatida.FieldByName('entry_2').AsDateTime;
     if not qryBatida.FieldByName('exit_2').IsNull then
-      Result := qryBatida.FieldByName('exit_2').AsDateTime;
+      Result := Result + qryBatida.FieldByName('exit_2').AsDateTime;
     if not qryBatida.FieldByName('entry_3').IsNull then
-      Result := qryBatida.FieldByName('entry_3').AsDateTime;
+      Result := Result + qryBatida.FieldByName('entry_3').AsDateTime;
     if not qryBatida.FieldByName('exit_3').IsNull then
-      Result := qryBatida.FieldByName('exit_3').AsDateTime;
+      Result := Result + qryBatida.FieldByName('exit_3').AsDateTime;
 
   end;
 begin
@@ -225,7 +230,8 @@ begin
         tolerancia := qryHorario.FieldByName('input_tolerance').AsInteger
       else
         tolerancia := qryHorario.FieldByName('output_tolerance').AsInteger;
-      if MinutesBetween(Now, ultima_batida) > tolerancia  then
+      ub :=  ultima_batida;
+      if MinutesBetween(Now, ub) < tolerancia  then
       begin
         raise Exception.Create('Ponto já registrado! Aguarde a tolerância para o próximo registro.');
       end

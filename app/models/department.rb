@@ -8,8 +8,8 @@ class Department < ActiveRecord::Base
 	validates_presence_of :responsible
 	scope :by_name, lambda {|parameter| where("upper(name) like upper(?)", "%#{parameter}%")}
 	
-	
-	def to_xml(options = {})
+
+  def to_xml(options = {})
     options[:indent] ||= 2
     xml = options[:builder] ||= Builder::XmlMarkup.new(:indent => options[:indent])
     xml.instruct! unless options[:skip_instruct]
@@ -19,6 +19,6 @@ class Department < ActiveRecord::Base
       xml.boss self.employee.name unless self.employee_id.nil?
     end
   end
-  
-  
+
+
 end

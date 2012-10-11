@@ -3,8 +3,8 @@ object frmSecugenCapture: TfrmSecugenCapture
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Registro de ponto'
-  ClientHeight = 212
-  ClientWidth = 418
+  ClientHeight = 400
+  ClientWidth = 784
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,26 +12,32 @@ object frmSecugenCapture: TfrmSecugenCapture
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
+  Position = poDesktopCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object edtStatus: TEdit
     Left = 0
-    Top = 191
-    Width = 418
-    Height = 21
-    Align = alBottom
+    Top = 0
+    Width = 784
+    Height = 37
+    Align = alTop
     Color = clInfoBk
-    Enabled = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWhite
+    Font.Height = -24
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
     TabOrder = 0
-    ExplicitWidth = 401
+    ExplicitWidth = 418
   end
   object btnInicializar: TButton
-    Left = 168
-    Top = 72
-    Width = 75
+    Left = 184
+    Top = 51
+    Width = 402
     Height = 25
     Caption = 'Inicializar'
     TabOrder = 1
