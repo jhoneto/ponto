@@ -7,7 +7,7 @@ class OfficeHour < ActiveRecord::Base
 	#validates_presence_of :is_free
 	validates_presence_of :input_tolerance
 	validates_presence_of :output_tolerance
-	validates_presence_of :enterprise_id
+	#validates_presence_of :enterprise_id
 
 	validates_numericality_of :input_tolerance
 	validates_numericality_of :output_tolerance

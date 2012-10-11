@@ -6,5 +6,6 @@ class DepartmentsController < InheritedResources::Base
   def index
     @departments = apply_scopes(Department).all
   end
+  
 
 end

@@ -60,18 +60,18 @@
 					<%= f.input :name, :input_html => { :class => 'span6' }%>
 				</div>
 				<div class="span4">
-					<%= f.association :enterprise, :label_method => :name, :input_html => { :class => 'span4', :onChange => "load_others_collections()" }%>
+					<%= f.association :enterprise, :label_method => :name, :input_html => { :class => 'span4' }%>
 				</div>
 			</div>
 			<div class="row">
 				<div class="span4">
 					<div id="combo_office_hour">
-						<%= f.association :office_hour, :collection => @office_hours, :label_method => :name, :input_html => { :class => 'span4' }%>
+						<%= f.association :office_hour, :collection => OfficeHour.all(:order => 'name'), :label_method => :name, :input_html => { :class => 'span4' }%>
 					</div>
 				</div>
 				<div class="span4">
 					<div id="combo_department">
-						<%= f.association :department, :collection => @departments, :label_method => :name, :input_html => { :class => 'span4' }%>
+						<%= f.association :department, :collection => Department.all(:order => 'name'), :label_method => :name, :input_html => { :class => 'span4' }%>
 					</div>
 				</div>
 				<div class="span4">

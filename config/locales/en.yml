@@ -22,6 +22,8 @@ en:
         name: "Descrição"
         enterprise: "Empresa"
         employee: "Responsável"
+        responsible: "Responsável"
+        father: "Departmento Superior"
       holiday:
         name: "Nome"
         date: "Data"

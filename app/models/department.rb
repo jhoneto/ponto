@@ -1,9 +1,11 @@
 class Department < ActiveRecord::Base
-  belongs_to :enterprise, :class_name => "Enterprise", :foreign_key => "enterprise_id"
+  #belongs_to :enterprise, :class_name => "Enterprise", :foreign_key => "enterprise_id"
+  has_many :children, :class_name => "Department", :foreign_key => "department_id"
+  belongs_to :father, :class_name => "Department"#, :foreign_key => "department_id"
   belongs_to :employee, :class_name => "Employee", :foreign_key => "employee_id"
 	validates_presence_of :name
-	validates_presence_of :enterprise_id
-	validates_presence_of :employee_id
+	#validates_presence_of :enterprise_id
+	validates_presence_of :responsible
 	scope :by_name, lambda {|parameter| where("upper(name) like upper(?)", "%#{parameter}%")}
 	
 	

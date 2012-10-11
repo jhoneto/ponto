@@ -6,11 +6,11 @@
   </div>
   
   <div class="form-inputs">
-    <%= f.association :enterprise, :label_method => :name %>
+    <%= f.input :department_id, :collection => Department.all(:order => 'name'), :label_method => :name, :value_method => :id, :include_blank => true %>
   </div>
   
   <div class="form-inputs">
-    <%= f.association :employee, :label_method => :name %>
+    <%= f.input :responsible %>
   </div>
 
   <div class="form-actions">
