@@ -10,6 +10,7 @@ type
   TfrmSecugenCapture = class(TForm)
     edtStatus: TEdit;
     btnInicializar: TButton;
+    mmoLog: TMemo;
     procedure btnInicializarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -49,10 +50,12 @@ begin
     if FDados.registrar_ponto(digital, retorno, erro) then
     begin
       edtStatus.Text := retorno;
+      mmoLog.Lines.Add(retorno);
       edtStatus.Color := clGreen;
     end
     else
     begin
+      mmoLog.Lines.Add(retorno);
       edtStatus.Text := erro;
       edtStatus.Color := clRed;
     end;

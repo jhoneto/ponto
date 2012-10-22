@@ -17,6 +17,17 @@ object frmSecugenCapture: TfrmSecugenCapture
   OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
+  object mmoLog: TMemo
+    Left = 0
+    Top = 37
+    Width = 784
+    Height = 363
+    Align = alClient
+    TabOrder = 2
+    ExplicitTop = 40
+    ExplicitWidth = 185
+    ExplicitHeight = 89
+  end
   object edtStatus: TEdit
     Left = 0
     Top = 0
@@ -32,7 +43,6 @@ object frmSecugenCapture: TfrmSecugenCapture
     ParentFont = False
     ReadOnly = True
     TabOrder = 0
-    ExplicitWidth = 418
   end
   object btnInicializar: TButton
     Left = 184
